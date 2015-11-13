@@ -5,7 +5,7 @@ Application Web de vente de pizzas
 * Installer NodeJS et NPM
 * Installer grunt-cli
 ```
-npm install grunt-cli
+npm install -g grunt-cli
 ```
 * Installer bower
 ```
