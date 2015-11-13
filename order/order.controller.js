@@ -9,12 +9,18 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider) {
     templateUrl: 'order/views/order.html',
     controller: 'OrderController',
     controllerAs: 'ctrl'
-  });
+  }),
+  .state('order.info', {
+    views {
+      ''
+    }
+  })
 });
 angular.module('pzWebAdminApp.order').controller('OrderController', function(PizzaService) {
   var vm = this;
 
   vm.pizzas = PizzaService.getPizzas();
 
-
+  vm.select = function(pizza) {
+  };
 });

@@ -1,6 +1,10 @@
 <input type="checkbox" ng-false-value="NO" ng-true-value="Margarita" ng-model="ctrl.pizzas.checked" />Margarita
 <ul>
-  <li ng-repeat="pizza in ctrl.pizzas  | PizzaFilter">
+  <li ng-repeat="pizza in ctrl.pizzas  | PizzaFilter" ng-click="ctrl.select(pizza)">
     {{pizza.name}}
   </li>
 </ul>
+
+<div ui-view="info">
+
+</div>
