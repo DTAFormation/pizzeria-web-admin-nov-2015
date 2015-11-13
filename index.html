@@ -20,7 +20,6 @@
   <!-- Main App JS -->
   <script src="shared/shared.js"></script>
   <script src="shared/service/user.service.js"></script>
-  <script src="order/order.controller.js"></script>
   <script src="home/home.js"></script>
   <script src="home/service/home.service.js"></script>
   <script src="app.js"></script>
@@ -30,7 +29,7 @@
     <div id="content" class="container">
       <div class="row">
       <h1>{{ctrl.title}}</h1>
-        <div ui-view>
+        <div ng-view>
         </div>
       </div>
     </div>
