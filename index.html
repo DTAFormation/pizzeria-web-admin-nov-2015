@@ -3,7 +3,7 @@
 <head>
   <title ng-bind="ctrl.title"></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <link href="app.css" type="text/css" rel="stylesheet/css">
 </head>
 <body>
@@ -17,12 +17,14 @@
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <!-- Add New Bower Component JS Above -->
 
 
   <!-- Main App JS -->
   <script src="shared/shared.js"></script>
   <script src="shared/service/user.service.js"></script>
+  <script src="order/order.controller.js"></script>
   <script src="home/home.js"></script>
   <script src="home/service/home.service.js"></script>
   <script src="app.js"></script>
@@ -32,7 +34,7 @@
     <div id="content" class="container">
       <div class="row">
       <h1>{{ctrl.title}}</h1>
-        <div ng-view>
+        <div ui-view>
         </div>
       </div>
     </div>
