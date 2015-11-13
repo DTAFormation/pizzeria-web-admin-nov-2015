@@ -1,5 +1,0 @@
-describe('homeServiceTest', function() {
-
-    // Tests
-
-});
