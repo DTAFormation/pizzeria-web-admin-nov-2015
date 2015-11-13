@@ -5,8 +5,10 @@ angular.module('pzWebAdminApp', [
     'pzWebAdminApp.shared',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
-    'ui.router'
-]);
+    'ui.router',
+    'PizzaService',
+    'pzWebAdminApp.filters'
+  ]);
 
 angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
     // $locationProvider.html5Mode(true);

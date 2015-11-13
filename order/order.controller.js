@@ -1,5 +1,6 @@
 angular.module('pzWebAdminApp.order', [
-  'ui.router'
+  'ui.router',
+  'PizzaService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider) {
   $stateProvider
@@ -10,8 +11,10 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider) {
     controllerAs: 'ctrl'
   });
 });
-angular.module('pzWebAdminApp.order').controller('OrderController', function() {
-  var self = this;
+angular.module('pzWebAdminApp.order').controller('OrderController', function(PizzaService) {
+  var vm = this;
 
-  self.title = "BLABLA";
+  vm.pizzas = PizzaService.getPizzas();
+
+
 });

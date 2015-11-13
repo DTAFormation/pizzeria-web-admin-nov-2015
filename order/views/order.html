@@ -1,4 +1,6 @@
-<div class="jumbotron">
-  <h1>{{ctrl.title}}</h1>
-  <p></p>
-</div>
+<input type="checkbox" ng-false-value="NO" ng-true-value="Margarita" ng-model="ctrl.pizzas.checked" />Margarita
+<ul>
+  <li ng-repeat="pizza in ctrl.pizzas  | PizzaFilter">
+    {{pizza.name}}
+  </li>
+</ul>
