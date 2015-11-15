@@ -7,6 +7,7 @@ angular.module('pzWebAdminApp', [
     'pzWebAdminApp.order',
     'ui.router',
     'PizzaService',
+    'DrinkService',
     'pzWebAdminApp.filters'
   ]);
 
