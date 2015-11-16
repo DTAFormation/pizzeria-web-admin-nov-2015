@@ -1,20 +1,24 @@
 <div>
-	<h2>Liste des utilisateurs</h2>
-	<table class="table table-default">
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Prénom</th>
-				<th>Type</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="user in ctrl.users">
-				<td>{{user.nom}}</td>
-				<td>{{user.prenom}}</td>
-				<td>{{user.type}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<a href="/utilisateurs/ajouter"><button type="button" class="btn btn-primary">Nouvel utilisateur</button></a>
+	<h2>Administration</h2>
+	<div ui-view="action">
+		
+		<h3>Liste des utilisateurs</h3>
+		<table class="table table-default">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in ctrl.users">
+					<td>{{user.nom}}</td>
+					<td>{{user.prenom}}</td>
+					<td>{{user.type}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="#/utilisateurs/ajouter"><button type="button" class="btn btn-primary">Nouvel utilisateur</button></a>
+	</div>
 </div>
