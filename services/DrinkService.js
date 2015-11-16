@@ -2,20 +2,20 @@ angular.module('DrinkService', []).service('DrinkService', function($http) {
 
     this.drinks = [
       {
-        "name":"Pina Colada",
-          "type":"drink"
+        "Nom":"Pina Colada",
+          "type":"BOISSON"
       },
       {
-        "name":"Jus d'ananus",
-          "type":"drink"
+        "Nom":"Jus d'ananus",
+          "type":"BOISSON"
       },
       {
-        "name":"7up",
-        "type":"drink"
+        "Nom":"7up",
+        "type":"BOISSON"
       },
       {
-        "name":"Canada Dry",
-          "type":"drink"
+        "Nom":"Canada Dry",
+          "type":"BOISSON"
       }
     ];
 

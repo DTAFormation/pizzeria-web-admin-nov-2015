@@ -8,7 +8,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   $stateProvider
   .state('order', {
     url: '/order',
-    abstrat: true,
+    abstract: true,
     views: {
       "": {
         templateUrl: 'order/views/order.html',
@@ -48,31 +48,33 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   vm.currentMeal= [];
 
   vm.newOrder = [];
-
+  vm.newOrder.products = [];
   vm.pizzas = PizzaService.getPizzas();
 
   vm.drinks = DrinkService.getDrinks();
 
   vm.items = vm.pizzas.concat(vm.drinks);
   vm.select = function(item) {
-    if ("pizza" === item.type) {
-      vm.currentMeal.pizzaName = item.name;
+    if ("PIZZA" === item.type) {
+      vm.currentMeal.pizzaName = item.Nom;
       }
     else {
-      vm.currentMeal.drinkName = item.name;
+      vm.currentMeal.drinkName = item.Nom;
       }
   };
 
   vm.validate = function() {
     $state.transitionTo('order.form');
-    console.log(vm.newOrder);
+    console.log(vm.newOrder.products);
   };
 
   vm.save = function() {
-    vm.newOrder.push({
-      pizzaName: vm.currentMeal.pizzaName,
-      drinkName: vm.currentMeal.drinkName
-    });
+
+    // vm.newOrder.push({
+    //   pizzaName: vm.currentMeal.pizzaName,
+    //   drinkName: vm.currentMeal.drinkName
+    // });
+    vm.newOrder.products.push(vm.currentMeal.pizzaName);
     vm.currentMeal.pizzaName = "";
     vm.currentMeal.drinkName = "";
   };
