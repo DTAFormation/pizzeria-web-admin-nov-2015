@@ -1,0 +1,28 @@
+  <div>
+    <button type="button" name="name" ng-click="ctrl.listAll()">All</button>
+    <button type="button" name="name" ng-click="ctrl.listDrinks()">Drinks</button>
+    <button type="button" name="name" ng-click="ctrl.listPizzas()">Pizzas</button>
+  </div>
+    <!-- <input type="checkbox" ng-false-value="NO" ng-true-value="Margarita"
+    ng-model="ctrl.pizzas.checked" />Margarita
+  <ul>
+    <li ng-repeat="item in ctrl.items  | PizzaFilter" ng-click="ctrl.select(item)">
+      {{item.name}}
+    </li>
+  </ul> -->
+  <div class="row">
+    <div class="col-lg-4">
+      <a ui-sref="order.menu">Menu</a>
+      <a ui-sref="order.pizza">Pizza</a>
+      <div ui-view="newOrderForm">
+      </div>
+
+    </div>
+    <!-- <div class="col-lg-4" ui-view="info"> -->
+    <div class="col-lg-8">
+      <ul class="list-group">
+        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.items  | PizzaFilter" ng-click="ctrl.select(item)">
+          {{item.name}}
+        </li>
+    </div>
+  </div>

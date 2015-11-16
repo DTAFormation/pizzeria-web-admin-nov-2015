@@ -3,15 +3,20 @@ angular.module('pzWebAdminApp', [
     'ngRoute',
     'ngAnimate',
     'pzWebAdminApp.shared',
-    'pzWebAdminApp.home'
-]);
+    'pzWebAdminApp.home',
+    'pzWebAdminApp.order',
+    'ui.router',
+    'PizzaService',
+    'DrinkService',
+    'pzWebAdminApp.filters'
+  ]);
 
-angular.module('pzWebAdminApp').config(function($routeProvider) {
-
+angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
+    // $locationProvider.html5Mode(true);
     // Ici, les routes générales de l'application
     // Pas de route spécifique ici !
     // Elles doivent être déclarées dans des sous-modules (comme 'home')
-    $routeProvider.otherwise({redirectTo:'/home'});
+    $urlRouterProvider.otherwise('/');
 });
 
 angular.module('pzWebAdminApp').run(function($rootScope) {
