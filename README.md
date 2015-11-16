@@ -1,5 +1,5 @@
 # Pizzeria Web Admin
-Application Web de vente de pizzas
+Application Web de vente de pizzas utilisée par les employés de la pizzéria
 
 [Testez ici !](http://dtaformation.github.io/pizzeria-web-admin-nov-2015/)
 
