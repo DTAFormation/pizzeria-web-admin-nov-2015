@@ -16,6 +16,16 @@ angular.module('pzWebAdminApp.home').config(function($stateProvider) {
             controller:"homeCtrl",
             controllerAs: "ctrl"
         });
+        
+    
+    //Pour menu dropdown Bootstrap
+    $(document).ready(function(){
+        $(".dropdown").on("show.bs.dropdown", function(event){
+            var x = $(event.relatedTarget).text(); // Get the button text
+            alert("You clicked on: " + x);
+        });
+    });
+
 });
 
 // Contrôleur principal du module 'home'
