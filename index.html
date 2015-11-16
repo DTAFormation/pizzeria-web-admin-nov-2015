@@ -4,6 +4,7 @@
   <title ng-bind="ctrl.title"></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
+<<<<<<< HEAD
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="template/CSS/style_perso.css">
@@ -18,10 +19,23 @@
 <script src="lib/angular-ui-utils/ui-utils.js"></script>
 <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 
+=======
+  <link href="app.css" type="text/css" rel="stylesheet/css">
+</head>
+<body>
+
+  <!-- JS from Bower Components -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
+  <script src="lib/angular-resource/angular-resource.js"></script>
+  <script src="lib/angular-ui-utils/ui-utils.js"></script>
+>>>>>>> refs/remotes/origin/master
   <!-- Add New Bower Component JS Above -->
 
 
   <!-- Main App JS -->
+<<<<<<< HEAD
   <script src="app.js"></script>
   <script src="shared/shared.js"></script>
   <script src="shared/service/user.service.js"></script>
@@ -76,5 +90,24 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+=======
+  <script src="shared/shared.js"></script>
+  <script src="shared/service/user.service.js"></script>
+  <script src="home/home.js"></script>
+  <script src="home/service/home.service.js"></script>
+  <script src="app.js"></script>
+  <!-- Add New Component JS Above -->
+
+  <div>
+    <div id="content" class="container">
+      <div class="row">
+      <h1>{{ctrl.title}}</h1>
+        <div ng-view>
+        </div>
+      </div>
+    </div>
+  </div>
+
+>>>>>>> refs/remotes/origin/master
 </body>
 </html>
