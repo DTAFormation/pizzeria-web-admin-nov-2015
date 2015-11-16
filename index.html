@@ -3,40 +3,39 @@
 <head>
   <title ng-bind="ctrl.title"></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta charset="utf-8">
-  <link href="app.css" type="text/css" rel="stylesheet/css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="template/CSS/style_perso.css">
 </head>
-<body>
-
-  <!-- Livereload script for development only (stripped during dist build) -->
-  <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
+<body class="container-fluid">
 
   <!-- JS from Bower Components -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-route/angular-route.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
+  <script src="lib/angular-resource/angular-resource.js"></script>
+  <script src="lib/angular-ui-utils/ui-utils.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+
   <!-- Add New Bower Component JS Above -->
 
 
   <!-- Main App JS -->
-  <script src="shared/shared.js"></script>
-  <script src="shared/service/user.service.js"></script>
-  <script src="home/home.js"></script>
-  <script src="home/service/home.service.js"></script>
-  <script src="app.js"></script>
+  <div ng-include="'template/scripts.html'"></div>
+
   <!-- Add New Component JS Above -->
+  <header ng-include="'template/header.html'"></header>
 
-  <div>
-    <div id="content" class="container">
-      <div class="row">
-      <h1>{{ctrl.title}}</h1>
-        <div ng-view>
-        </div>
-      </div>
-    </div>
-  </div>
 
+  <nav ng-include="'template/menu.html'" class="navbar navbar-default"></nav>
+  <!--Contenu-->
+  <div ui-view class="col-lg-12"></div>
+
+  <footer ng-include="'template/footer.html'"></footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>
