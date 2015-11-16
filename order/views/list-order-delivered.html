@@ -1,0 +1,43 @@
+<table>
+	<h1>Liste des commandes à livrer</h1>
+
+<thead>
+	<tr>
+		<th>Numéro de la commande</th>
+		<th>Numéro du client</th>
+		<th>Type de la commande</th>
+		<th>Total de la commande</th>
+		<th>Statut du paiement</th>
+		<th>Etat de la commande</th>
+	</tr>
+
+</thead>
+
+<tbody>
+	<tr>
+		<td ng-repat="commande in commandesalivrer">
+			{{commande.id}}
+
+			{{commande.id_Client}}
+
+			{{commande.type}}
+
+			{{commande.total}}
+
+			{{commande.paiement}}
+
+			{{commande.paye}}
+
+			{{commande.etat}}
+
+		</td>
+		<td><input type="submit" value="Valider"/>Valider</td>
+	</tr>
+
+</tbody>
+
+	
+
+
+
+
