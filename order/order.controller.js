@@ -53,10 +53,12 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
 vm.items = vm.pizzas.concat(vm.drinks);
   vm.select = function(item) {
-    if ("pizza" === item.type)
+    if ("pizza" === item.type) {
       vm.currentOrder.pizzaName = item.name;
-    else
+      }
+    else {
       vm.currentOrder.drinkName = item.name;
+      }
   };
 
   vm.validate = function() {
@@ -66,7 +68,7 @@ vm.items = vm.pizzas.concat(vm.drinks);
 
   vm.save = function() {
     vm.newOrder.push(vm.currentOrder);
-  }
+  };
 
   vm.listAll = function() {
     vm.items = vm.pizzas.concat(vm.drinks);
