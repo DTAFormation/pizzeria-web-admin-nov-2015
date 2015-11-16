@@ -4,36 +4,77 @@
   <title ng-bind="ctrl.title"></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
-  <link href="app.css" type="text/css" rel="stylesheet/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="template/CSS/style_perso.css">
 </head>
-<body>
+<body class="container-fluid">
 
   <!-- JS from Bower Components -->
   <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular-route/angular-route.js"></script>
-  <script src="lib/angular-animate/angular-animate.js"></script>
-  <script src="lib/angular-resource/angular-resource.js"></script>
-  <script src="lib/angular-ui-utils/ui-utils.js"></script>
+<script src="lib/angular-route/angular-route.js"></script>
+<script src="lib/angular-animate/angular-animate.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/angular-ui-utils/ui-utils.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+
   <!-- Add New Bower Component JS Above -->
 
 
   <!-- Main App JS -->
+  <script src="app.js"></script>
   <script src="shared/shared.js"></script>
   <script src="shared/service/user.service.js"></script>
+  <script src="order/order.controller.js"></script>
   <script src="home/home.js"></script>
   <script src="home/service/home.service.js"></script>
-  <script src="app.js"></script>
+  <script src="services/PizzaService.js"></script>
+    <script src="services/DrinkService.js"></script>
+  <script src="filters/PizzaFilter.js"></script>
   <!-- Add New Component JS Above -->
-
-  <div>
-    <div id="content" class="container">
-      <div class="row">
-      <h1>{{ctrl.title}}</h1>
-        <div ng-view>
-        </div>
+  <header>
+      <div class="jumbotron text-center">
+        <h1>Pizza Admin</h1>
       </div>
-    </div>
-  </div>
+    </header>
+    <nav class="navbar navbar-default">
 
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Pizza Home</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/">Pizza Admin</a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ><a href="#/caisse">Caisse</a></li>
+          <li ><a href="#/cuisine">Cuisine</a></li>
+          <li ><a href="#/livraison">Livraison</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#/administration">Administration <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li ><a href="#/pizzaAdmin">Pizza</a></li>
+              <li ><a href="#/menuAdmin">Menu</a></li>
+              <li ><a href="#/produitAdmin">Produit</a></li>
+              <li ><a href="#/userAdmin">Utilisateurs</a></li>
+              <li ><a href="#/statsAdmin/">Stats</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--Contenu-->
+    <div ui-view class="col-lg-12"></div>
+
+  <footer>
+
+  </footer>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>

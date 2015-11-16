@@ -1,15 +1,17 @@
 // Déclaration du module 'home'
 angular.module('pzWebAdminApp.home', [
     'ngRoute',
-    'pzWebAdminApp.shared'
+    'pzWebAdminApp.shared',
+    'ui.router'
 ]);
 
 // Configuration du module 'home'
-angular.module('pzWebAdminApp.home').config(function($routeProvider) {
+angular.module('pzWebAdminApp.home').config(function($stateProvider) {
 
     // TODO Définir les routes spécifiques au module 'home' ici
-    $routeProvider
-        .when("/home",{
+    $stateProvider
+        .state("home", {
+            url: '/',
             templateUrl:"home/template/home.tpl.html",
             controller:"homeCtrl",
             controllerAs: "ctrl"
