@@ -8,7 +8,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   $stateProvider
   .state('order', {
     url: '/order',
-    abstrat: true,
+    abstract: true,
     views: {
       "": {
         templateUrl: 'order/views/order.html',

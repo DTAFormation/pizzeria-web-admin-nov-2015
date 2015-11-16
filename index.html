@@ -21,10 +21,6 @@
   <!-- Add New Bower Component JS Above -->
 
 
-  <!-- Main App JS -->
-
-  <div ng-include="'template/scripts.html'"></div>
-
   <!-- Add New Component JS Above -->
   <header ng-include="'template/header.html'"></header>
 
@@ -34,7 +30,16 @@
 
   <footer ng-include="'template/footer.html'"></footer>
 
-
+  <script src="app.js"></script>
+  <script src="shared/shared.js"></script>
+  <script src="shared/service/user.service.js"></script>
+  <script src="order/order.controller.js"></script>
+  <script src="user/user.controller.js"></script>
+  <script src="home/home.js"></script>
+  <script src="home/service/home.service.js"></script>
+  <script src="services/PizzaService.js"></script>
+  <script src="services/DrinkService.js"></script>
+  <script src="filters/PizzaFilter.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
