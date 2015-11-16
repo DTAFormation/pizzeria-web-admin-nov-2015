@@ -1,12 +1,14 @@
-<table>
+<table class="table table-striped">
+
 	<h1>Liste des commandes à livrer</h1>
 
-<thead>
+<thead>   
 	<tr>
 		<th>Numéro de la commande</th>
 		<th>Numéro du client</th>
 		<th>Type de la commande</th>
 		<th>Total de la commande</th>
+		<th>Type de paiement</th>
 		<th>Statut du paiement</th>
 		<th>Etat de la commande</th>
 	</tr>
@@ -14,27 +16,28 @@
 </thead>
 
 <tbody>
-	<tr>
-		<td ng-repat="commande in commandesalivrer">
-			{{commande.id}}
 
-			{{commande.id_Client}}
+	<tr ng-repeat="commande in ctrl.commandesalivrer">
+		<td>{{commande.id}}</td>
 
-			{{commande.type}}
+		<td>{{commande.id_Client}}</td>
 
-			{{commande.total}}
+		<td>{{commande.type}}</td>
 
-			{{commande.paiement}}
+		<td>{{commande.total}}</td>
 
-			{{commande.paye}}
+		<td>{{commande.paiement}}</td>
 
-			{{commande.etat}}
+		<td>{{commande.paye}}</td>
 
-		</td>
-		<td><input type="submit" value="Valider"/>Valider</td>
+		<td>{{commande.etat}}</td>
+
+		<td><input type="submit" value="Valider"/></td>
 	</tr>
 
 </tbody>
+
+</table>
 
 	
 
