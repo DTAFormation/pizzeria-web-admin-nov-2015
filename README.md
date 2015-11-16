@@ -1,6 +1,8 @@
 # Pizzeria Web Admin
 Application Web de vente de pizzas
 
+[Testez ici !](http://dtaformation.github.io/pizzeria-web-admin-nov-2015/)
+
 ## Prérequis
 * Installer NodeJS et NPM
 * Installer live-serverhttps://github.com/DTAFormation/pizzeria-web-admin-nov-2015/blob/master/README.md
