@@ -14,8 +14,6 @@ angular.module('pzWebAdminApp.shared').service('userService', function($http, $q
         // TODO Gestion de la déconnexion
     };
 
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> refs/remotes/origin/master
+
+

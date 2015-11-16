@@ -2,7 +2,7 @@
 <form ng-submit="ctrl.save()" name="ctrl.newOrder" novalidate>
 
 <label for="">Pizza</label>
-       <input type="text" ng-model="ctrl.newOrder.pizzaName">
+       <input type="text" ng-model="ctrl.currentOrder.pizzaName">
 
        <button type="submit">Save</button>
        <!-- <label for="">type</label>
@@ -22,3 +22,12 @@
    </p> -->
 
 </form>
+
+<div class="row">
+    <div class="col-lg-4">
+      <ul class="list-group">
+        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder">
+          {{item.pizzaName}}
+        </li>
+    </div>
+</div>

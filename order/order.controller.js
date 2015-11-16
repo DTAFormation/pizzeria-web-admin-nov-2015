@@ -20,9 +20,6 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   .state('order.form', {
     url: '',
     views: {
-      // 'newOrderForm@order': {
-      //   templateUrl: 'order/views/form.order.html'
-      // },
       'info@order': {
         templateUrl: 'order/views/info.order.html'
       }
@@ -48,6 +45,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   var vm = this;
   $state.transitionTo('order.form');
 
+  vm.currentOrder= [];
   vm.newOrder = [];
   vm.pizzas = PizzaService.getPizzas();
 
@@ -56,15 +54,19 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 vm.items = vm.pizzas.concat(vm.drinks);
   vm.select = function(item) {
     if ("pizza" === item.type)
-      vm.newOrder.pizzaName = item.name;
+      vm.currentOrder.pizzaName = item.name;
     else
-      vm.newOrder.drinkName = item.name;
+      vm.currentOrder.drinkName = item.name;
   };
 
-  vm.save = function() {
+  vm.validate = function() {
     console.log(vm.newOrder);
     $state.transitionTo('order.form');
   };
+
+  vm.save = function() {
+    vm.newOrder.push(vm.currentOrder);
+  }
 
   vm.listAll = function() {
     vm.items = vm.pizzas.concat(vm.drinks);
