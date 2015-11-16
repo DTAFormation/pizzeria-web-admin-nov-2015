@@ -1,11 +1,12 @@
 <h2>New Menu</h2>
-<form ng-submit="ctrl.save()" name="ctrl.newOrder" novalidate>
+
+<form ng-submit="ctrl.save()" name="ctrl.currentMeal" novalidate>
 
         <label for="">Pizza</label>
-       <input type="text" ng-model="ctrl.currentOrder.pizzaName">
+       <input type="text" ng-model="ctrl.currentMeal.pizzaName">
 
        <label for="">Drink</label>
-       <input class="focusedInput" autofocus="autofocus" type="text" ng-model="ctrl.currentOrder.drinkName">
+       <input class="focusedInput" autofocus="autofocus" type="text" ng-model="ctrl.currentMeal.drinkName">
 
        <button type="submit">Save</button>
        <!-- <label for="">type</label>
@@ -27,10 +28,8 @@
 </form>
 
 <div class="row">
-    <div class="col-lg-4">
       <ul class="list-group">
-        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder">
-          {{item.pizzaName}} AND {{item.drinkName}}
-        </li>
-    </div>
+        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder track by $index">
+          {{item.pizzaName}} {{item.drinkName}}
 </div>
+<button type="button" class="btn btn-success" name="name" ng-click="ctrl.validate()">Valider</button>

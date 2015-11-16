@@ -45,29 +45,36 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   var vm = this;
   $state.transitionTo('order.form');
 
-  vm.currentOrder= [];
+  vm.currentMeal= [];
+
   vm.newOrder = [];
+
   vm.pizzas = PizzaService.getPizzas();
 
   vm.drinks = DrinkService.getDrinks();
 
-vm.items = vm.pizzas.concat(vm.drinks);
+  vm.items = vm.pizzas.concat(vm.drinks);
   vm.select = function(item) {
     if ("pizza" === item.type) {
-      vm.currentOrder.pizzaName = item.name;
+      vm.currentMeal.pizzaName = item.name;
       }
     else {
-      vm.currentOrder.drinkName = item.name;
+      vm.currentMeal.drinkName = item.name;
       }
   };
 
   vm.validate = function() {
-    console.log(vm.newOrder);
     $state.transitionTo('order.form');
+    console.log(vm.newOrder);
   };
 
   vm.save = function() {
-    vm.newOrder.push(vm.currentOrder);
+    vm.newOrder.push({
+      pizzaName: vm.currentMeal.pizzaName,
+      drinkName: vm.currentMeal.drinkName
+    });
+    vm.currentMeal.pizzaName = "";
+    vm.currentMeal.drinkName = "";
   };
 
   vm.listAll = function() {

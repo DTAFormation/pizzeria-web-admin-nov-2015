@@ -1,8 +1,9 @@
 <h2>New Pizza</h2>
-<form ng-submit="ctrl.save()" name="ctrl.newOrder" novalidate>
+
+<form ng-submit="ctrl.save()" name="ctrl.currentMeal" novalidate>
 
 <label for="">Pizza</label>
-       <input type="text" ng-model="ctrl.currentOrder.pizzaName">
+       <input type="text" ng-model="ctrl.currentMeal.pizzaName">
 
        <button type="submit">Save</button>
        <!-- <label for="">type</label>
@@ -22,12 +23,12 @@
    </p> -->
 
 </form>
-
 <div class="row">
-    <div class="col-lg-4">
+    <!-- <div class="col-lg-4"> -->
       <ul class="list-group">
-        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder">
-          {{item.pizzaName}}
+        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder track by $index">
+          {{item.pizzaName}} {{item.drinkName}}
         </li>
-    </div>
+    <!-- </div> -->
 </div>
+<button type="button" class="btn btn-success" name="name" ng-click="ctrl.validate()">Valider</button>
