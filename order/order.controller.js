@@ -1,7 +1,8 @@
 angular.module('pzWebAdminApp.order', [
   'ui.router',
   'PizzaService',
-  'DrinkService'
+  'DrinkService',
+  'CommandService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
 
@@ -41,46 +42,64 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   });
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService) {
+angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService) {
   var vm = this;
   $state.transitionTo('order.form');
 
-  vm.currentMeal= [];
+  vm.currentMeal=[];
+  vm.currentMeal.pizza={};
+  vm.currentMeal.drink={};
 
-  vm.newOrder = [];
-  vm.newOrder.products = [];
-  vm.pizzas = PizzaService.getPizzas();
+  vm.newOrder = {};
+  vm.newOrder.produits = [];
 
-  vm.drinks = DrinkService.getDrinks();
+  PizzaService.getPizzas().then(function Success(results) {
+      vm.pizzas = results;
+      DrinkService.getDrinks().then(function Success(results) {
+        vm.drinks = results;
+        vm.items = vm.pizzas.concat(vm.drinks);
+      });
+  });
 
-  vm.items = vm.pizzas.concat(vm.drinks);
+
   vm.select = function(item) {
+
     if ("PIZZA" === item.type) {
-      vm.currentMeal.pizzaName = item.Nom;
+      vm.currentMeal.pizza.nom = item.nom;
       }
     else {
-      vm.currentMeal.drinkName = item.Nom;
+      vm.currentMeal.drink.nom = item.nom;
       }
   };
 
   vm.validate = function() {
+
+    vm.newOrder.total = "100";
+    vm.newOrder.paiement = "CARTE";
+    vm.newOrder.paye = "false";
+    vm.newOrder.etat = "EN_COURS";
+    CommandService.saveCommand(vm.newOrder);
+  //  console.log(vm.newOrder);
     $state.transitionTo('order.form');
-    console.log(vm.newOrder.products);
+
+
   };
 
   vm.save = function() {
-
-    // vm.newOrder.push({
-    //   pizzaName: vm.currentMeal.pizzaName,
-    //   drinkName: vm.currentMeal.drinkName
-    // });
-    vm.newOrder.products.push(vm.currentMeal.pizzaName);
-    vm.currentMeal.pizzaName = "";
-    vm.currentMeal.drinkName = "";
+    
+    vm.newOrder.produits.push(vm.currentMeal.pizza);
+    vm.newOrder.produits.push(vm.currentMeal.drink);
+    vm.currentMeal=null;
   };
 
+  vm.setPrice = function() {
+
+  }
+
   vm.listAll = function() {
-    vm.items = vm.pizzas.concat(vm.drinks);
+    //vm.items = vm.pizzas.concat(vm.drinks);
+    console.log(vm.pizzas);
+    vm.items = vm.pizzas;
   };
   vm.listDrinks = function() {
     vm.items = vm.drinks;

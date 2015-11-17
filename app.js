@@ -8,10 +8,15 @@ angular.module('pzWebAdminApp', [
     'ui.router',
     'PizzaService',
     'DrinkService',
+    'CommandService',
     'pzWebAdminApp.filters'
   ]);
 
-angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
+angular.module('pzWebAdminApp').config(function($httpProvider,$urlRouterProvider, $locationProvider) {
+  $httpProvider.defaults.headers.common = {};
+//  $httpProvider.defaults.headers.post = {};
+  $httpProvider.defaults.headers.put = {};
+  $httpProvider.defaults.headers.patch = {};
     // $locationProvider.html5Mode(true);
     // Ici, les routes générales de l'application
     // Pas de route spécifique ici !

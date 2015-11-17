@@ -1,5 +1,7 @@
 angular.module('DrinkService', []).service('DrinkService', function($http) {
 
+  var s = this;
+  var url = "http://localhost:8080/drink";
     this.drinks = [
       {
         "Nom":"Pina Colada",
@@ -19,8 +21,9 @@ angular.module('DrinkService', []).service('DrinkService', function($http) {
       }
     ];
 
-    this.getDrinks = function() {
-      return this.drinks;
-    };
-
+    s.getDrinks = function() {
+      return $http.get(url).then(function Success(response) {
+        return response.data;
+          });
+        };
 });

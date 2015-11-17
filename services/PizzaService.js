@@ -1,6 +1,8 @@
 angular.module('PizzaService', []).service('PizzaService', function($http) {
 
-    this.pizzas = [
+    var s = this;
+    var url = "http://localhost:8080/";
+    s.pizzas = [
       {
         "Nom":"Margarita",
         "type":"PIZZA"
@@ -23,8 +25,15 @@ angular.module('PizzaService', []).service('PizzaService', function($http) {
       }
     ];
 
-    this.getPizzas = function() {
-      return this.pizzas;
+    s.handleResponse = function(reponse) {
+      return reponse.data;
+    };
+
+    s.getPizzas = function() {
+      return $http.get(url+"pizza").then(function success(response) {
+        return response.data;
+      });
+      // return this.pizzas;
     };
 
 });
