@@ -1,7 +1,12 @@
 angular.module('pzWebAdminApp.shared').service('userService', function($http, $q) {
 
     var connected = false;
-    var url="http://localhost:3000/steps";
+    var url="http://localhost:8080/user";
+
+    function handleResponse(response) {
+        // console.log("Success !")
+        return response.data
+    }
 
     this.isConnected = function() {
         return connected;
@@ -16,27 +21,24 @@ angular.module('pzWebAdminApp.shared').service('userService', function($http, $q
     };
 
     this.findOne=function(id){
-        // return $http.get(url+id);
-        return {id:2,nom:"bob",prenom:"Bankrout",password:"bb",login:"login",type:"Utilisateur"};
+        return $http.get(url +"/"+ id)
+            .then(handleResponse);
     };
     this.findAll=function(){
-        return $http.get(url);
+        return $http.get(url)
+            .then(handleResponse);
     };
     this.addUser=function(user){
-        /*return $http.post(url,user).then(function(response){
-            return response.data;
-        });*/
-        console.log(user);
+        return $http.post(url,user)
+            .then(handleResponse);
     };
     this.updateUser=function(user){
-        return $http.put(url,user).then(function(response){
-            return response.data;
-        });
+        return $http.put(url,user)
+            .then(handleResponse);
     };
 
-    this.deleteUser=function(user){
-        return $http.delete(url,user).then(function(response){
-            return response.data;
-        });
+    this.deleteUser=function(id){
+        return $http.delete(url +"/"+ id)
+            .then(handleResponse);
     };
 });
