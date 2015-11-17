@@ -1,7 +1,8 @@
 angular.module('pzWebAdminApp.order', [
   'ui.router',
   'PizzaService',
-  'DrinkService'
+  'DrinkService',
+  'CommandeService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
 
@@ -39,6 +40,16 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
     views: {
       'newOrderForm': {
         templateUrl: 'order/views/pizza.order.html'
+      }
+    }
+  })
+  .state('orderReady', {
+    url: '/ready',
+    views: {
+      "": {
+        templateUrl: 'order/viewsReady/liste.order.html',
+        controller: 'ReadyController',
+        controllerAs: 'ctrl'
       }
     }
   });
