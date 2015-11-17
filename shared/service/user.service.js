@@ -18,7 +18,7 @@ angular.module('pzWebAdminApp.shared').service('userService', function($http, $q
 
     this.findOne=function(id){
         // return $http.get(url+id);
-        return {nom:"bob",prenom:"Bankrout",password:"bb",type:"catcheur"};
+        return {id:2,nom:"bob",prenom:"Bankrout",password:"bb",login:"login",type:"Utilisateur"};
     };
     this.findAll=function(){
         return $http.get(url);
@@ -31,6 +31,12 @@ angular.module('pzWebAdminApp.shared').service('userService', function($http, $q
     };
     this.updateUser=function(user){
         return $http.put(url,user).then(function(response){
+            return response.data;
+        });
+    };
+
+    this.deleteUser=function(user){
+        return $http.delete(url,user).then(function(response){
             return response.data;
         });
     };

@@ -1,20 +1,22 @@
 <div>
 	<h2>Administration</h2>
-	<div ui-view="action">
+	<div ui-view="action" >
 		
 		<h3>Liste des utilisateurs</h3>
-		<table class="table table-default">
+		<table class="table table-default container">
 			<thead>
 				<tr>
 					<th>Nom</th>
 					<th>Prénom</th>
+					<th>Identifiant</th>
 					<th>Type</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="user in ctrl.users">
-					<td>{{user.nom}}</td>
+					<td><a href="#/utilisateurs/modifier/{{user.id}}">{{user.nom}}</a></td>
 					<td>{{user.prenom}}</td>
+					<td>{{user.login}}</td>
 					<td>{{user.type}}</td>
 				</tr>
 			</tbody>

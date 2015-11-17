@@ -1,4 +1,4 @@
-<form ng-model="ctrl.user" method="POST" role="form">
+<form ng-model="ctrl.user" ng-submit="ctrl.save()" method="POST" role="form" >
 	<legend>Modifier l'utilisateur</legend>
 
 	<div class="form-group">
@@ -11,6 +11,10 @@
 		<input ng-model="ctrl.user.prenom" type="text" class="form-control" id="prenom">
 	</div>
 	<div class="form-group">
+		<label for="login">Identifiant</label>
+		<input ng-model="ctrl.user.login" type="text" class="form-control" id="login">
+	</div>
+	<div class="form-group">
 		<label for="password">Mot de passe</label>
 		<input ng-model="ctrl.user.password" type="password" class="form-control" id="password">
 	</div>
@@ -20,6 +24,6 @@
 			<option ng-repeat="t in ctrl.types">{{t}}</option>
 		</select>
 	</div>
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" class="btn btn-primary">Modifier</button>
+	<button type="button" ng-click="ctrl.delete(ctrl.user)" class="btn btn-danger">Supprimer</button>
 </form>
-
