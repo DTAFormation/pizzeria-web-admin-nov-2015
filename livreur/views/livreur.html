@@ -1,0 +1,21 @@
+<h1>Commandes prise en charge</h1>
+		<table class="table">
+			<caption>Commandes prise en charge
+			</caption>	
+			<thead>
+			<tr>
+				<th>Commande n° </th>
+				<th> Liste des produits </th>
+				<th> A cliquer </th>
+			</tr>
+			</thead>
+			<tbody>
+			<p>
+			<tr ng-repeat="commande in ctrl.commandes_livreur">
+					<td>{{commande.id_commande}}</td>
+					<td>{{commande.produits}} </br> {{commande.menus}} </td>
+					<td><button type="button" ng-click="ctrl.change_etat(id_commande)" class="btn btn-success" title="Changer l'état de la commande à &quot;Livraison&quot;"> Prise en charge </button></td>
+			</tr>
+			</p>
+			</tbody>
+		</table>

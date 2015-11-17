@@ -5,8 +5,12 @@ angular.module('pzWebAdminApp', [
     'pzWebAdminApp.shared',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
+    'pzWebAdminApp.cuisine',
+    'pzWebAdminApp.livreur',
     'ui.router',
     'PizzaService',
+    'CommandePizzaService',
+    'CommandeLivreurService',
     'DrinkService',
     'pzWebAdminApp.filters'
   ]);
