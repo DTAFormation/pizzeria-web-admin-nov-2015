@@ -1,7 +1,10 @@
 angular.module('pzWebAdminApp.product', [
   'ui.router',
   'PizzaService',
-  'DrinkService'
+  'DessertService',
+  'DrinkService',
+  'IngredientsService',
+  'ProductService'
   ]);
 angular.module('pzWebAdminApp.product').config(function($stateProvider, $urlRouterProvider) {
 
@@ -68,60 +71,25 @@ angular.module('pzWebAdminApp.product').config(function($stateProvider, $urlRout
 
 });
 
-angular.module('pzWebAdminApp.product').controller('productController', function($state, PizzaService, DrinkService) {
+angular.module('pzWebAdminApp.product').controller('productController', function($state, PizzaService, DrinkService,DessertService,IngredientsService,ProductService) {
   var ctrl=this;
   $state.transitionTo('product.list');
-  ctrl.pizzas = PizzaService.getPizzas();
-  ctrl.boissons = DrinkService.getDrinks();
-  ctrl.desserts=null;
-  ctrl.listproducts = ctrl.pizzas.concat(ctrl.boissons).concat(ctrl.desserts);
+   
+  PizzaService.getPizzaList().then(function ihaveit(response){
+  ctrl.pizzas = response  
+  });
+  
+  DrinkService.getDrinkList().then(function ihaveit(response){
+  ctrl.boissons = response  
+  });
 
-//BOUTON
+  DessertService.getDessertList().then(function ihaveit(response){
+  ctrl.desserts = response  
+  });
 
-    //Partie détail dans la vue Liste Produit
-        //Pour l'afichage du détail
-        ctrl.select = function(item) {
-          ctrl.produitSelectionner=item;
-        };
-        //Bouton modifier du détail du produit
-
-        ctrl.modifier=function(item){
-           $state.transitionTo('product.modifproduct');
-        }
-        //Bouton supprimer du détail du produit
-        ctrl.supprimer=function(item){
-                      //TODO
-
-           $state.transitionTo('product.list');
-        }
-
-    //Pour la vue liste ingredient
-        ctrl.supprimerIngredient=function(item){
-                      //TODO
-
-          $state.transitionTo('product.listingredient');             
-        }
-
-    //Pour le formulaire d'ajout d'un produit et modification
-        ctrl.save = function() {
-          if(this.productForm.$invalid){
-            alert("Erreur")
-            return
-          }
-          console.log(ctrl.listingredientForm);
-          console.log(ctrl.productForm);//ToDO enregistrement dans BDD
-          $state.transitionTo('product.list');
-        };
-
-    //Pour le formulaire d'ajout d'un ingredient
-        ctrl.saveIngredient = function() {
-          if(this.productForm.$invalid){
-            alert("Erreur")
-            return
-          }
-          console.log(ctrl.ingredientForm);//ToDO enregistrement dans BDD
-          $state.transitionTo('product.listingredient');
-        }
+  IngredientsService.getIngredientList().then(function ihaveit(response){
+  ctrl.ingredientsProducts = response  
+  });
 
 //Initialisation de variable pour les formulaires
 ctrl.typeProducts=[ {
@@ -150,19 +118,6 @@ ctrl.tailleProducts=[ {
  "nom":"XLARGE",
 }],
 
-ctrl.ingredientsProducts=[ {
- "id":"1",
- "nom":"FROMAGE",
-},
-{
- "id":"2",
- "nom":"TOMATE",
-},
-{
- "id":"3",
- "nom":"CHORIZO",
-}],
-
 ctrl.formatProducts=[ {
  "id":"1",
  "nom":"NORMAL",
@@ -176,4 +131,83 @@ ctrl.formatProducts=[ {
 //Pour selectionner les ingredients sur le formulaire d'ajout de produit
   ctrl.listingredientForm=[]
 
+
+
+//BOUTON
+
+    //Partie détail dans la vue Liste Produit
+        //Pour l'afichage du détail
+        ctrl.select = function(item) {
+          ctrl.produitSelectionner=item;
+        };
+
+        //Bouton modifier du détail du produit
+        ctrl.modifier=function(item){
+           $state.transitionTo('product.modifproduct');
+        }
+
+        //Bouton supprimer du détail du produit
+        ctrl.supprimer=function(id){
+           ProductService.deleteProduct(id).then(function ihaveit(response){
+            $state.transitionTo('product.list');
+          });
+        }
+
+    //Pour la vue liste ingredient
+        ctrl.supprimerIngredient=function(item){
+          IngredientsService.deleteIngredient(id).then(function ihaveit(response){
+            $state.transitionTo('product.listingredient'); 
+          });       
+        }
+
+    //Pour le formulaire d'ajout d'un produit et modification
+        ctrl.save = function() {
+          if(this.productForm.$invalid){
+            alert("Erreur")
+            return
+          }
+          ctrl.productForm.ingredients=ctrl.listingredientForm
+
+          ProductService.saveProduct(ctrl.productForm).then(function ihaveit(response){
+            $state.transitionTo('product.list'); 
+          }); 
+
+        };
+
+        ctrl.updateProduit = function() {
+          if(this.productForm.$invalid){
+            alert("Erreur")
+            return
+          }
+           ctrl.productForm.ingredients=ctrl.listingredientForm
+
+          ProductService.updateProduct(ctrl.productForm).then(function ihaveit(response){
+            $state.transitionTo('product.list');
+          }); 
+
+        };
+
+    //Pour le formulaire d'ajout d'un ingredient
+        ctrl.saveIngredient = function() {
+          if(this.ingredientForm.$invalid){
+            alert("Erreur")
+            return
+          }
+
+          IngredientsService.saveIngredient(ctrl.ingredientForm).then(function ihaveit(response){
+             $state.transitionTo('product.listingredient');
+          }); 
+         
+        }
+
+    //Pour la suppression d'un ingredient
+    ctrl.suppressionimerIngredient=function(id){
+
+         IngredientsService.deleteIngredient(id).then(function ihaveit(response){
+             $state.transitionTo('product.listingredient');
+          }); 
+    }
+
+
 });
+

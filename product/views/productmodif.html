@@ -10,7 +10,7 @@
 
 {{ctrl.produitSelectionner}}
 		<div class="row col-lg-12 form-group">
-			<form name="ctrl.productForm" ng-submit="ctrl.save()" novalidate>
+			<form name="ctrl.productForm" ng-submit="ctrl.updateProduit()" novalidate>
 				<div ng-show="ctrl.productForm.$invalid && ctrl.productForm.$dirty">
 					<h1>Les champs avec * sont obligatoires</h1>
 				</div>

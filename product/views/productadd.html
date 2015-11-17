@@ -17,13 +17,13 @@
 
 				<div class="form-group">
 					<label for="nom">Nom*:</label>
-					<input class="form-control" type="text" id="nom" name="nom" placeholder="Nom du nouveau produit" ng-model="ctrl.productForm.name" required>
+					<input class="form-control" type="text" id="nom" name="nom" ng-model="ctrl.productForm.nom" required>
 				</div>
 
 				<div class="form-group">
 					<label for="type">Type:</label>
 					<select  class="form-control" id="type" name="type" ng-model="ctrl.productForm.type">
-      					<option ng-repeat="typeproduct in ctrl.typeProducts" value="{{typeproduct.id}}">{{typeproduct.nom}}</option>
+      					<option ng-repeat="typeproduct in ctrl.typeProducts" value="{{typeproduct.nom}}">{{typeproduct.nom}}</option>
     				</select>
 				</select>
 			</div>
@@ -31,14 +31,14 @@
 			<div class="form-group">
 				<label for="taille">Taille (Pizza):</label>
 					<select  class="form-control" id="taille" name="taille" ng-model="ctrl.productForm.taille">
-      					<option ng-repeat="tailleproduct in ctrl.tailleProducts" value="{{tailleproduct.id}}">{{tailleproduct.nom}}</option>
+      					<option ng-repeat="tailleproduct in ctrl.tailleProducts" value="{{tailleproduct.nom}}">{{tailleproduct.nom}}</option>
     				</select>
 		</div>
 
 		<div class="form-group">
 			<label for="format">Format (Boisson):</label>
 					<select  class="form-control" id="format" name="format" ng-model="ctrl.productForm.format">
-      					<option ng-repeat="formatproduct in ctrl.formatProducts" value="{{formatproduct.id}}">{{formatproduct.nom}}</option>
+      					<option ng-repeat="formatproduct in ctrl.formatProducts" value="{{formatproduct.nom}}">{{formatproduct.nom}}</option>
     				</select>
 	</div>
 
@@ -50,7 +50,7 @@
 	</div>
 
 	<div class="form-groupe form-inline" ng-repeat="ingredientproduct in ctrl.ingredientsProducts">
-		<input class="checkbox" type="checkbox" data-checklist-model="ctrl.listingredientForm" data-checklist-value="ingredientproduct"> {{ingredientproduct.nom}} 
+		<input class="checkbox" type="checkbox" ng-model="ingredientproduct.selected"> {{ingredientproduct.nom}} 
 	</div>
 <!--Submit-->
 <div class="form-group">

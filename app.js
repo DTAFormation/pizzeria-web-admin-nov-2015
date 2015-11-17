@@ -9,7 +9,10 @@ angular.module('pzWebAdminApp', [
     'ui.router',
     'PizzaService',
     'DrinkService',
-    'pzWebAdminApp.filters',
+    'DessertService',
+    'IngredientsService',
+    'ProductService',
+    'pzWebAdminApp.filters'
   ]);
 
 angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
