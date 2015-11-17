@@ -1,0 +1,57 @@
+<div class="col-lg-12"><h1>Liste des produits</h1><br></br></div>	
+
+<div class="row">
+	<!-- Partie Listing affichage panneau-->
+	<div class="col-lg-8">
+
+		<!-- Liste des Pizza-->
+		<div class="row">
+			<div><h2>Pizza</h2></div>
+			<div class="col-xs-2 h3 btn btn-warning product" ng-repeat="product in ctrl.pizzas track by $index" ng-click="ctrl.select(product)">
+				{{product.nom}}
+			</div>
+		</div>
+
+		<!-- Liste des Boisson-->
+		<div class="row">
+			<div><h2>Boisson</h2></div>
+			<div class="col-xs-2 h3 btn btn-info product" ng-repeat="product in ctrl.boissons track by $index" ng-click="ctrl.select(product)">{{product.nom}}
+			</div>
+		</div>
+
+		<!-- Liste des Dessert-->
+		<div class="row">
+			<div><h2>Dessert</h2></div>
+			<div class="col-xs-2 h3 btn btn-info product" ng-repeat="product in ctrl.desserts track by $index" ng-click="ctrl.select(product)">{{product.nom}}
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Partie détails et liens (de modification et suppression)-->
+	<div class="col-lg-4 panel panel-default">
+		<!-- Détail du produit sélectionner -->
+		<div class="row col-lg-12">
+			<h3 class="text-center"> {{ctrl.produitSelectionner.nom}} </h3>
+			<br>Type: {{ctrl.produitSelectionner.type}} </br>
+			<br>Taille: {{ctrl.produitSelectionner.taille}} </br>
+			<br>Format: {{ctrl.produitSelectionner.format}} </br>
+			<br>Liste ingrédient:</br> 
+				<ul>
+					<li ng-repeat="ingredient in ctrl.produitSelectionner.ingredient">{{ingredient.name}}</li>
+				</ul>
+			<br>Prix: {{ctrl.produitSelectionner.prix}} € </br>
+			<br> </br>
+		</div>
+		<div class="row col-lg-12" ng-show="ctrl.produitSelectionner.type!=null">
+			<div class="col-lg-2"> </div>
+			<!--Bouton Modifier-->
+			<div class="col-lg-4 btn btn-danger product" ng-click="ctrl.modifier(ctrl.produitSelectionner)">Modifier</div>
+			<div class="col-lg-1"> </div>
+			<!--Bouton Supprimer-->
+			<div class="col-lg-4 btn btn-danger product"ng-click="ctrl.supprimer(ctrl.produitSelectionner)">Supprimer</div>
+			<div class="col-lg-1"> </div>
+		</div>
+	</div>
+</div>
+</div>

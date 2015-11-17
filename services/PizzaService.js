@@ -2,24 +2,29 @@ angular.module('PizzaService', []).service('PizzaService', function($http) {
 
     this.pizzas = [
       {
-        "name":"Margarita",
-        "type":"pizza"
+        "id":"1",
+        "nom":"Margarita",
+        "type":"PIZZA"
       },
       {
-        "name":"Extravaganzza",
-        "type":"pizza"
+         "id":"2",
+        "nom":"Extravaganzza",
+        "type":"PIZZA"
       },
       {
-        "name":"Cannibale",
-        "type":"pizza"
+         "id":"3",
+        "nom":"Cannibale",
+        "type":"PIZZA"
       },
       {
-        "name":"Indienne",
-        "type":"pizza"
+         "id":"4",
+        "nom":"Indienne",
+        "type":"PIZZA"
       },
       {
-        "name":"Bacon Groovy",
-        "type":"pizza"
+         "id":"5",
+        "nom":"Bacon Groovy",
+        "type":"PIZZA"
       }
     ];
 
