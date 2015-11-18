@@ -71,9 +71,6 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     else {
       vm.currentMeal.drink = item;
       }
-
-      // vm.currentMeal.total = (angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
-      //                          (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix);
   };
 
   vm.validate = function() {
