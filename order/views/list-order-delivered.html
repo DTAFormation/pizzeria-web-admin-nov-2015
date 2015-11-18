@@ -1,0 +1,46 @@
+<table class="table table-striped">
+
+	<h1>Liste des commandes à livrer</h1>
+
+<thead>   
+	<tr>
+		<th>Numéro de la commande</th>
+		<th>Numéro du client</th>
+		<th>Type de la commande</th>
+		<th>Total de la commande</th>
+		<th>Type de paiement</th>
+		<th>Statut du paiement</th>
+		<th>Etat de la commande</th>
+	</tr>
+
+</thead>
+
+<tbody>
+
+	<tr ng-repeat="commande in ctrl.commandesalivrer">
+		<td>{{commande.id}}</td>
+
+		<td>{{commande.client.id}}</td>
+
+		<td>{{commande.type}}</td>
+
+		<td>{{commande.total}}</td>
+
+		<td>{{commande.paiement}}</td>
+
+		<td>{{commande.paye}}</td>
+
+		<td>{{commande.etat}}</td>
+
+		<td><input type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Valider"></input></td>
+	</tr>
+
+</tbody>
+
+</table>
+
+	
+
+
+
+
