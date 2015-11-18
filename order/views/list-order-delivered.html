@@ -20,7 +20,7 @@
 	<tr ng-repeat="commande in ctrl.commandesalivrer">
 		<td>{{commande.id}}</td>
 
-		<td>{{commande.id_Client}}</td>
+		<td>{{commande.client.id}}</td>
 
 		<td>{{commande.type}}</td>
 
@@ -32,7 +32,7 @@
 
 		<td>{{commande.etat}}</td>
 
-		<td><input type="submit" value="Valider"/></td>
+		<td><input type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Valider"></input></td>
 	</tr>
 
 </tbody>

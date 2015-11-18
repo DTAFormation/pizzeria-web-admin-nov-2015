@@ -1,7 +1,8 @@
 angular.module('pzWebAdminApp.order', [
   'ui.router',
   'PizzaService',
-  'DrinkService'
+  'DrinkService',
+  'CommandeService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
 
@@ -87,40 +88,51 @@ vm.items = vm.pizzas.concat(vm.drinks);
     vm.items = vm.pizzas;
   };
 });
-angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state) {
+angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandeService) {
   var self = this;
    $state.transitionTo('orderdelivered');
 
   self.title = "BLABLA";
 
-  self.commandesalivrer = [
-    {
-      id:"1",
-      id_Client: 1, 
-      type:"livraison",
-      total:12.50, 
-      paiement:"espèces",
-      paye:false,
-      etat:"livraison"
-    },
-     {
-      id:"2",
-      id_Client: 12,
-      type:"livraison",
-      total:50.00,
-      paiement:"carte",
-      paye:true,
-      etat:"en cours"
-    },
-     {
-      id:"3",
-      id_Client: 12,
-      type:"livraison",
-      total:100.20,
-      paiement:"carte",
-      paye:false,
-      etat:"livraison"
-    }
-  ]
+self.select = function(commande){
+  commande.etat ="LIVRAISON";
+console.log(commande)
+}  
+
+CommandeService.getCommande().then(function(results){
+
+self.commandesalivrer = results;
+
+}.bind(this))
+
+  // self.commandesalivrer = [
+  //   {
+  //     id:"1",
+  //     id_Client: 1, 
+  //     type:"livraison",
+  //     total:12.50, 
+  //     paiement:"espèces",
+  //     paye:false,
+  //     etat:"livraison"
+  //   },
+  //    {
+  //     id:"2",
+  //     id_Client: 12,
+  //     type:"livraison",
+  //     total:50.00,
+  //     paiement:"carte",
+  //     paye:true,
+  //     etat:"prepare"
+  //   },
+  //    {
+  //     id:"3",
+  //     id_Client: 12,
+  //     type:"livraison",
+  //     total:100.20,
+  //     paiement:"carte",
+  //     paye:false,
+  //     etat:"livraison"
+  //   }
+  // ]
 });
 
