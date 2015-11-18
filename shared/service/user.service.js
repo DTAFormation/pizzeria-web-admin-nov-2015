@@ -5,7 +5,7 @@
 
     function handleResponse(response) {
         // console.log("Success !")
-        return response.data
+        return response.data;
     }
 
     this.isConnected = function() {

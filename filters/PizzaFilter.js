@@ -7,7 +7,7 @@ angular.module('pzWebAdminApp.filters', []).filter('PizzaFilter', function Pizza
       return pizzas;
     var newPizzas = [];
     for (var i = 0; i < checkedPizzas.length; i++) {
-      if (checkedPizzas[i].name != cp)
+      if (checkedPizzas[i].Nom != cp)
         newPizzas.push(checkedPizzas[i]);
     }
     return newPizzas;

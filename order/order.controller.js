@@ -2,6 +2,7 @@ angular.module('pzWebAdminApp.order', [
   'ui.router',
   'PizzaService',
   'DrinkService',
+  'CommandService',
   'CommandeService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
@@ -21,9 +22,6 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   .state('order.form', {
     url: '',
     views: {
-      // 'newOrderForm@order': {
-      //   templateUrl: 'order/views/form.order.html'
-      // },
       'info@order': {
         templateUrl: 'order/views/info.order.html'
       }
@@ -45,47 +43,90 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   })
   .state('orderReady', {
     url: '/ready',
-    views: {
-      "": {
-        templateUrl: 'order/viewsReady/liste.order.html',
-        controller: 'ReadyController',
-        controllerAs: 'ctrl'
-      }
-    }
-  });
+    templateUrl: 'order/viewsReady/liste.order.html',
+    controller: 'ReadyController',
+    controllerAs: 'ctrl'
+    // views: {
+    //   "": {
+    //
+    //   }
+    // }
+  })
 
-   $stateProvider
-        .state("orderdelivered", {
+.state("orderdelivered", {
             url: '/orderdelivered',
              templateUrl: 'order/views/list-order-delivered.html',
         controller: 'OrderDeliveredController',
         controllerAs: 'ctrl'
         });
 
-  
+
 
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService) {
+angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService) {
   var vm = this;
   $state.transitionTo('order.form');
 
-  vm.newOrder = [];
-  vm.pizzas = PizzaService.getPizzas();
+  vm.currentMeal=[];
 
-  vm.drinks = DrinkService.getDrinks();
+  vm.currentMeal.pizza={};
+  vm.currentMeal.drink={};
 
-vm.items = vm.pizzas.concat(vm.drinks);
+  vm.newOrder = {};
+    vm.newOrder.total = 0;
+  vm.newOrder.produits = [];
+
+  PizzaService.getPizzaList().then(function Success(results) {
+      vm.pizzas = results;
+      DrinkService.getDrinkList().then(function Success(results) {
+        vm.drinks = results;
+        vm.items = vm.pizzas.concat(vm.drinks);
+      });
+  });
+
+
   vm.select = function(item) {
-    if ("pizza" === item.type)
-      vm.newOrder.pizzaName = item.name;
-    else
-      vm.newOrder.drinkName = item.name;
+    if ("PIZZA" === item.type) {
+      vm.currentMeal.pizza = item;
+      }
+    else {
+      vm.currentMeal.drink = item;
+      }
+  };
+
+  vm.validate = function() {
+
+    vm.newOrder.paye = "false";
+    vm.newOrder.etat = "EN_COURS";
+    CommandService.saveCommand(vm.newOrder);
+    vm.currentMeal.pizza = null;
+    vm.currentMeal.drink = null;
+    vm.newOrder.total = 0;
+    $state.transitionTo('order.form');
+
+
   };
 
   vm.save = function() {
-    console.log(vm.newOrder);
-    $state.transitionTo('order.form');
+    for (var i in vm.pizzas) {
+      if (vm.pizzas[i].nom === vm.currentMeal.pizza.nom &&
+          vm.pizzas[i].taille === vm.currentMeal.taille) {
+        vm.currentMeal.pizza = vm.pizzas[i];
+      }
+    }
+    for (var j in vm.drinks) {
+      if (vm.drinks[j].nom === vm.currentMeal.drink.nom &&
+          vm.drinks[j].format === vm.currentMeal.format) {
+        vm.currentMeal.drink = vm.drinks[j];
+      }
+    }
+    vm.newOrder.produits.push(vm.currentMeal.pizza);
+    vm.newOrder.produits.push(vm.currentMeal.drink);
+    vm.newOrder.total += (angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
+                             (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix);
+    vm.currentMeal.pizza = null;
+    vm.currentMeal.drink = null;
   };
 
   vm.listAll = function() {
@@ -98,6 +139,7 @@ vm.items = vm.pizzas.concat(vm.drinks);
     vm.items = vm.pizzas;
   };
 });
+
 angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandeService) {
   var self = this;
    $state.transitionTo('orderdelivered');
@@ -105,47 +147,20 @@ angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', fun
   self.title = "BLABLA";
 
 self.select = function(commande){
-  if(commande.etat=="LIVRAISON")
-    commande.etat="TERMINE";
-  else
+
+  if(commande.etat=="LIVRAISON") {
+      commande.etat="TERMINE";
+    }
+  else {
     commande.etat ="LIVRAISON";
+    }
   CommandeService.updateCommande(commande);
-}  
+};
 
 CommandeService.getCommandesPretesLivraison().then(function(results){
 
 self.commandesalivrer = results;
 
-}.bind(this))
+}.bind(this));
 
-  // self.commandesalivrer = [
-  //   {
-  //     id:"1",
-  //     id_Client: 1, 
-  //     type:"livraison",
-  //     total:12.50, 
-  //     paiement:"espèces",
-  //     paye:false,
-  //     etat:"livraison"
-  //   },
-  //    {
-  //     id:"2",
-  //     id_Client: 12,
-  //     type:"livraison",
-  //     total:50.00,
-  //     paiement:"carte",
-  //     paye:true,
-  //     etat:"prepare"
-  //   },
-  //    {
-  //     id:"3",
-  //     id_Client: 12,
-  //     type:"livraison",
-  //     total:100.20,
-  //     paiement:"carte",
-  //     paye:false,
-  //     etat:"livraison"
-  //   }
-  // ]
 });
-
