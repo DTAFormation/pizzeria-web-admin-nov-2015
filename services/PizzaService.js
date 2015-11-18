@@ -1,30 +1,12 @@
-angular.module('PizzaService', []).service('PizzaService', function($http) {
+angular.module('PizzaService', []).service('PizzaService', function($http,$q) {
 
-    this.pizzas = [
-      {
-        "name":"Margarita",
-        "type":"pizza"
-      },
-      {
-        "name":"Extravaganzza",
-        "type":"pizza"
-      },
-      {
-        "name":"Cannibale",
-        "type":"pizza"
-      },
-      {
-        "name":"Indienne",
-        "type":"pizza"
-      },
-      {
-        "name":"Bacon Groovy",
-        "type":"pizza"
-      }
-    ];
+  function handleResponse(response) {
+    return response.data
+  }
 
-    this.getPizzas = function() {
-      return this.pizzas;
-    };
+  this.getPizzaList=function(){
+    return $http.get('http://localhost:8080/pizza')
+    .then(handleResponse)
+  }
 
 });

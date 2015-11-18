@@ -1,26 +1,12 @@
-angular.module('DrinkService', []).service('DrinkService', function($http) {
+angular.module('DrinkService', []).service('DrinkService', function($http,$q) {
 
-    this.drinks = [
-      {
-        "name":"Pina Colada",
-        "type":"drink"
-      },
-      {
-        "name":"Jus d'ananus",
-        "type":"drink"
-      },
-      {
-        "name":"7up",
-        "type":"drink"
-      },
-      {
-        "name":"Canada Dry",
-        "type":"drink"
-      }
-    ];
+  function handleResponse(response) {
+    return response.data
+  }
 
-    this.getDrinks = function() {
-      return this.drinks;
-    };
+  this.getDrinkList=function(){
+    return $http.get('http://localhost:8080/drink')
+    .then(handleResponse)
+  }
 
 });
