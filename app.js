@@ -1,17 +1,28 @@
-angular.module('pzWebAdminApp', [
+﻿angular.module('pzWebAdminApp', [
     'ui.utils',
     'ngRoute',
     'ngAnimate',
+    'ui.router',
+
     'pzWebAdminApp.shared',
+    'pzWebAdminApp.filters',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
+    'pzWebAdminApp.product',
     'pzWebAdminApp.user',
-    'ui.router',
+
+    'ProductService',
     'PizzaService',
     'DrinkService',
+
     'CommandService',
-    'CommandeService',
-    'pzWebAdminApp.filters'
+
+
+
+    'DessertService',
+    'IngredientsService',
+    'CommandeService'
+
   ]);
 
 angular.module('pzWebAdminApp').config(function($httpProvider,$urlRouterProvider, $locationProvider) {

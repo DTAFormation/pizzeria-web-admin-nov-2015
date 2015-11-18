@@ -77,9 +77,9 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.newOrder.total = 0;
   vm.newOrder.produits = [];
 
-  PizzaService.getPizzas().then(function Success(results) {
+  PizzaService.getPizzaList().then(function Success(results) {
       vm.pizzas = results;
-      DrinkService.getDrinks().then(function Success(results) {
+      DrinkService.getDrinkList().then(function Success(results) {
         vm.drinks = results;
         vm.items = vm.pizzas.concat(vm.drinks);
       });

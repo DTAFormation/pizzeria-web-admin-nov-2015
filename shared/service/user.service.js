@@ -1,4 +1,4 @@
-angular.module('pzWebAdminApp.shared').service('userService', function($http, $q) {
+﻿angular.module('pzWebAdminApp.shared').service('userService', function($http, $q) {
 
     var connected = false;
     var url="http://localhost:8080/user";
@@ -19,6 +19,7 @@ angular.module('pzWebAdminApp.shared').service('userService', function($http, $q
     this.logout = function() {
         // TODO Gestion de la déconnexion
     };
+
 
     this.findOne=function(id){
         return $http.get(url +"/"+ id)
@@ -41,4 +42,5 @@ angular.module('pzWebAdminApp.shared').service('userService', function($http, $q
         return $http.delete(url +"/"+ id)
             .then(handleResponse);
     };
+
 });

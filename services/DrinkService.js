@@ -1,11 +1,15 @@
-angular.module('DrinkService', []).service('DrinkService', function($http) {
+angular.module('DrinkService', []).service('DrinkService', function($http,$q) {
 
-  var s = this;
   var url = "http://localhost:8080/drink";
 
-    s.getDrinks = function() {
-      return $http.get(url).then(function Success(response) {
-        return response.data;
-          });
-        };
+  function handleResponse(response) {
+    return response.data;
+  }
+
+  this.getDrinkList=function(){
+    return $http.get('http://localhost:8080/drink')
+    .then(handleResponse);
+  };
+
+
 });
