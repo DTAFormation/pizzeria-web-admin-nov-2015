@@ -105,11 +105,14 @@ angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', fun
   self.title = "BLABLA";
 
 self.select = function(commande){
-  commande.etat ="LIVRAISON";
-console.log(commande)
+  if(commande.etat=="LIVRAISON")
+    commande.etat="TERMINE";
+  else
+    commande.etat ="LIVRAISON";
+  CommandeService.updateCommande(commande);
 }  
 
-CommandeService.getCommande().then(function(results){
+CommandeService.getCommandesPretesLivraison().then(function(results){
 
 self.commandesalivrer = results;
 

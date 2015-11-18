@@ -71,13 +71,17 @@ angular.module('CommandeService', []).service('CommandeService', function($http)
         return response.data
     }
 
-    this.getCommandes= function () {
-            return $http.get('http://localhost:8080/commandesPretes')
+    this.getCommandesPretesLivraison= function () {
+            return $http.get('http://localhost:8080/commandesPretesLivraison')
             .then(handleResponse)
     }
 
-    this.updateToTermine= function (commande) {
-    		commande.etat="TERMINE";
+    this.getCommandesPretesCaisse= function () {
+            return $http.get('http://localhost:8080/commandesPretesCaisse')
+            .then(handleResponse)
+    }
+
+    this.updateCommande= function (commande) {
             return $http.put('http://localhost:8080/command', commande)
             .then(handleResponse)
     }
