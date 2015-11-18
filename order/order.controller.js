@@ -102,6 +102,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     CommandService.saveCommand(vm.newOrder);
     vm.currentMeal.pizza = null;
     vm.currentMeal.drink = null;
+    vm.newOrder.total = 0;
     $state.transitionTo('order.form');
 
 
