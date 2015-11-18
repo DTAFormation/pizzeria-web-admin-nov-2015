@@ -4,7 +4,7 @@
 
         <label for="">Pizza</label>
        <input type="text" ng-model="ctrl.currentMeal.pizza.nom" value="test">
-       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.pizza.taille">
+       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.taille">
         <option value="MOYEN">M</option>
         <option value="LARGE">L</option>
         <option value="XLARGE">XL</option>
@@ -13,27 +13,38 @@
 
        <label for="">Drink</label>
        <input type="text" ng-model="ctrl.currentMeal.drink.nom">
-       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.drink.format">
-        <option value="NORMAL">M</option>
+       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.format">
+        <option value="NORMAL">N</option>
         <option value="XL">L</option>
       </select><br>
         <!-- <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="NORMAL"/>NORMAL
         <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="XL"/>XL -->
 
-       <button type="submit">Save</button><input type="text" ng-model="ctrl.currentMeal.total">
+       <button type="submit">Save</button>
 
 
 </form>
 
+<label for="">Commande</label>
+<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.type">
+ <option value="LIVRAISON">Livraison</option>
+ <option value="SUR_PLACE">Sur place</option>
+ <option value="A_EMPORTER">A emporter</option>
+</select><br>
+
+<label for="">Paiement</label>
+<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.paiement">
+ <option value="EN_LIGNE">En ligne</option>
+ <option value="CARTE">Carte</option>
+ <option value="LIQUIDE">Liquide</option>
+</select><br>
+
+<button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>
+<label for="">Total</label>
+<input type="text" ng-model="ctrl.newOrder.total"></input>
 <div class="row">
       <ul class="list-group">
 
         <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder.produits track by $index">
-          {{item.nom + ":" + item.taille}} {{item.produits.drink.nom}}
+          {{item.nom}}
 </div>
-<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.type">
- <option ng-click="ctrl.setPrice()" value="LIVRAISON">Livraison</option>
- <option value="SUR_PLACE">Sur place</option>
- <option value="A_EMPORTER">A emporter</option>
-</select><br>
-<button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>

@@ -47,10 +47,12 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   $state.transitionTo('order.form');
 
   vm.currentMeal=[];
+
   vm.currentMeal.pizza={};
   vm.currentMeal.drink={};
 
   vm.newOrder = {};
+    vm.newOrder.total = 0;
   vm.newOrder.produits = [];
 
   PizzaService.getPizzas().then(function Success(results) {
@@ -63,38 +65,47 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
 
   vm.select = function(item) {
-
     if ("PIZZA" === item.type) {
-      vm.currentMeal.pizza.nom = item.nom;
+      vm.currentMeal.pizza = item;
       }
     else {
-      vm.currentMeal.drink.nom = item.nom;
+      vm.currentMeal.drink = item;
       }
+
+      // vm.currentMeal.total = (angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
+      //                          (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix);
   };
 
   vm.validate = function() {
 
-    vm.newOrder.total = "100";
-    vm.newOrder.paiement = "CARTE";
     vm.newOrder.paye = "false";
     vm.newOrder.etat = "EN_COURS";
     CommandService.saveCommand(vm.newOrder);
-  //  console.log(vm.newOrder);
     $state.transitionTo('order.form');
 
 
   };
 
   vm.save = function() {
-    
+    for (var i in vm.pizzas) {
+      if (vm.pizzas[i].nom === vm.currentMeal.pizza.nom &&
+          vm.pizzas[i].taille === vm.currentMeal.taille) {
+        vm.currentMeal.pizza = vm.pizzas[i];
+      }
+    }
+    for (var j in vm.drinks) {
+      if (vm.drinks[j].nom === vm.currentMeal.drink.nom &&
+          vm.drinks[j].format === vm.currentMeal.format) {
+        vm.currentMeal.drink = vm.drinks[j];
+      }
+    }
     vm.newOrder.produits.push(vm.currentMeal.pizza);
     vm.newOrder.produits.push(vm.currentMeal.drink);
-    vm.currentMeal=null;
+    vm.newOrder.total += (angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
+                             (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix);
+    vm.currentMeal.pizza = null;
+    vm.currentMeal.drink = null;
   };
-
-  vm.setPrice = function() {
-
-  }
 
   vm.listAll = function() {
     //vm.items = vm.pizzas.concat(vm.drinks);

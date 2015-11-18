@@ -35,5 +35,4 @@ angular.module('PizzaService', []).service('PizzaService', function($http) {
       });
       // return this.pizzas;
     };
-
 });
