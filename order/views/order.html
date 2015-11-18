@@ -23,7 +23,8 @@
     <!-- <div class="col-lg-4" ui-view="info"> -->
     <div class="col-lg-8">
       <ul class="list-group">
-        <li class="col-lg-2 list-group-item" ng-if="item.taille=='LARGE' || item.format == 'NORMAL'" ng-repeat="item in ctrl.items" ng-click="ctrl.select(item)">
+        <!-- ng-if="item.taille=='LARGE' || item.format == 'NORMAL'" -->
+        <li class="col-lg-2 list-group-item"  ng-repeat="item in ctrl.items" ng-click="ctrl.select(item)">
           {{item.nom}}
           <!-- <button type="button" name="name" ng-click="ctrl.listPizzas()">M</button> -->
         </li>
