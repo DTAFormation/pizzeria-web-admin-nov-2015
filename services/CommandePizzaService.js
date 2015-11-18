@@ -1,5 +1,5 @@
 angular.module('CommandePizzaService', []).service('CommandePizzaService', function($http) {
-
+/*
     this.commandes_pizzas = [
       {
         "id_commande_pizza":"1",
@@ -35,7 +35,15 @@ angular.module('CommandePizzaService', []).service('CommandePizzaService', funct
 
     this.getCommandesPizzas = function() {
       return this.commandes_pizzas;
-    };
+    };*/
+    
+    function handleResponse(response) {
+        return response.data;
+    }
 
+    this.getCommandesPizzas = function () {
+            return $http.get('http://localhost:8080/commandesEnCours')
+            .then(handleResponse);
+    }
 
 });

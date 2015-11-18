@@ -8,7 +8,6 @@ angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRout
   $stateProvider
   .state('cuisine', {
     url: '/cuisine',
-    abstrat: true,
     views: {
       "": {
         templateUrl: 'cuisine/views/cuisine.html',
@@ -24,6 +23,8 @@ angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRout
 
 angular.module('pzWebAdminApp.cuisine').controller('CuisineController', function($state, CommandePizzaService) {
   var vm = this;
-  vm.commandes_pizzas = CommandePizzaService.getCommandesPizzas();
-  
+  CommandePizzaService.getCommandesPizzas()
+  .then(function(commandes){
+    vm.commandesPizza = commandes;
+  }.bind(this))
   });

@@ -11,8 +11,8 @@
 			</thead>
 			<tbody>
 			<p>
-			<tr ng-repeat="commande in ctrl.commandes_livreur">
-					<td>{{commande.id_commande}}</td>
+			<tr ng-repeat="commande in ctrl.commandesLivreur">
+					<td>{{commande.id}}</td>
 					<td>{{commande.produits}} </br> {{commande.menus}} </td>
 					<td><button type="button" ng-click="ctrl.change_etat(id_commande)" class="btn btn-success" title="Changer l'état de la commande à &quot;Livraison&quot;"> Prise en charge </button></td>
 			</tr>

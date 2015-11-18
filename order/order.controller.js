@@ -1,14 +1,15 @@
 angular.module('pzWebAdminApp.order', [
   'ui.router',
   'PizzaService',
-  'DrinkService'
+  'DrinkService',
+  'CommandeService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
   .state('order', {
     url: '/order',
-    abstrat: true,
+    abstract: true,
     views: {
       "": {
         templateUrl: 'order/views/order.html',
@@ -41,7 +42,28 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
         templateUrl: 'order/views/pizza.order.html'
       }
     }
+  })
+  .state('orderReady', {
+    url: '/ready',
+    views: {
+      "": {
+        templateUrl: 'order/viewsReady/liste.order.html',
+        controller: 'ReadyController',
+        controllerAs: 'ctrl'
+      }
+    }
   });
+
+   $stateProvider
+        .state("orderdelivered", {
+            url: '/orderdelivered',
+             templateUrl: 'order/views/list-order-delivered.html',
+        controller: 'OrderDeliveredController',
+        controllerAs: 'ctrl'
+        });
+
+  
+
 });
 
 angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService) {
@@ -76,3 +98,40 @@ vm.items = vm.pizzas.concat(vm.drinks);
     vm.items = vm.pizzas;
   };
 });
+angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state) {
+  var self = this;
+   $state.transitionTo('orderdelivered');
+
+  self.title = "BLABLA";
+
+  self.commandesalivrer = [
+    {
+      id:"1",
+      id_Client: 1, 
+      type:"livraison",
+      total:12.50, 
+      paiement:"espèces",
+      paye:false,
+      etat:"livraison"
+    },
+     {
+      id:"2",
+      id_Client: 12,
+      type:"livraison",
+      total:50.00,
+      paiement:"carte",
+      paye:true,
+      etat:"en cours"
+    },
+     {
+      id:"3",
+      id_Client: 12,
+      type:"livraison",
+      total:100.20,
+      paiement:"carte",
+      paye:false,
+      etat:"livraison"
+    }
+  ]
+});
+

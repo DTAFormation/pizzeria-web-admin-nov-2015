@@ -1,5 +1,5 @@
 angular.module('CommandeLivreurService', []).service('CommandeLivreurService', function($http) {
-
+    /*
     this.commandes_livreur = [
       {
         "id_commande":"1",
@@ -34,7 +34,14 @@ angular.module('CommandeLivreurService', []).service('CommandeLivreurService', f
 
     this.getCommandesLivreurs = function() {
       return this.commandes_livreur;
-    };
+    };*/
 
+    function handleResponse(response) {
+        return response.data;
+    }
 
+    this.getCommandesLivreurs = function () {
+            return $http.get('http://localhost:8080/commandesEnCours')
+            .then(handleResponse);
+    }
 });

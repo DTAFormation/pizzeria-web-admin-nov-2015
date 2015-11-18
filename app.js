@@ -10,6 +10,7 @@ angular.module('pzWebAdminApp', [
     'ui.router',
     'PizzaService',
     'CommandePizzaService',
+    'CommandeService',
     'CommandeLivreurService',
     'DrinkService',
     'pzWebAdminApp.filters'

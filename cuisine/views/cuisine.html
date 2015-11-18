@@ -12,10 +12,10 @@
 			</thead>
 			<tbody>
 			<p>
-			<tr ng-repeat="commande_pizza in ctrl.commandes_pizzas">
-					<td>{{commande_pizza.id_commande}}</td>
-					<td>{{commande_pizza.name_pizza}}</td>
-					<td>{{commande_pizza.taille}}</td>
+			<tr ng-repeat="commande in ctrl.commandesPizza">
+					<td>{{commande.id}}</td>
+					<td>{{commande.produit.name}}</td>
+					<td>{{commande.produit.taille}}</td>
 					<td><button type="button" ng-click="ctrl.change_etat(id_commande_pizza)" class="btn btn-success" title="Changer l'état de la Pizza à &quot;Préparée&quot;">Préparée</button></td>
 			</tr>
 			</p>

@@ -3,11 +3,11 @@ angular.module('DrinkService', []).service('DrinkService', function($http) {
     this.drinks = [
       {
         "name":"Pina Colada",
-          "type":"drink"
+        "type":"drink"
       },
       {
         "name":"Jus d'ananus",
-          "type":"drink"
+        "type":"drink"
       },
       {
         "name":"7up",
@@ -15,7 +15,7 @@ angular.module('DrinkService', []).service('DrinkService', function($http) {
       },
       {
         "name":"Canada Dry",
-          "type":"drink"
+        "type":"drink"
       }
     ];
 
