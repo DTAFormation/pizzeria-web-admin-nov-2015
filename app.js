@@ -6,10 +6,12 @@ angular.module('pzWebAdminApp', [
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
     'pzWebAdminApp.user',
+    'pzWebAdminApp.cuisine',
     'ui.router',
     'PizzaService',
     'DrinkService',
     'CommandeService',
+    'CommandePizzaService',
     'pzWebAdminApp.filters'
   ]);
 
