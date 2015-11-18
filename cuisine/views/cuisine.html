@@ -1,0 +1,29 @@
+	<h1>Liste des pizzas à réaliser</h1>
+		<table class="table">
+			<caption>Pizza à faire
+			</caption>	
+			<thead>
+			<tr>
+				<th>Id</th>
+				<th>Commande</th>
+				<th>Client</th>
+				<th>Type</th>
+				<th>Etat</th>
+				<th>Validation</th>
+			</tr>
+			</thead>
+			<tbody>
+			<p>
+			<tr ng-repeat="tab in ctrl.commandesPizza">
+					<td>{{tab.id}}</td>
+					<td>Les Produits:<br><span ng-repeat="tabProduits in tab.produits">{{tabProduits.nom}} - {{tabProduits.prix}}€<br></span><br>
+						Les Menus: <br><span ng-repeat="tabMenus in tab.menus">{{tabMenus.nom}} - {{tabMenus.prix}}€<br></span><br>
+						Total: {{tab.total}}€</td>
+					<td>{{tab.client.login}} - ({{tab.client.prenom}} {{tab.client.nom}})</td>
+					<td>{{tab.type}}</td>
+					<td>{{tab.etat}}</td>
+					<td><button type="button" ng-click="ctrl.validerPreparation(tab)" class="btn btn-success" title="Changer l'état de la Pizza à &quot;Préparée&quot;">Préparée</button></td>
+			</tr>
+			</p>
+			</tbody>
+		</table>

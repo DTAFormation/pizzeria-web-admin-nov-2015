@@ -135,8 +135,8 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.newOrder.produits.push(vm.currentMeal.drink);
     vm.newOrder.produits.push(vm.currentMeal.dessert);
     vm.newOrder.total += (angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
-                             (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix) +
-                             (angular.isUndefined(vm.currentMeal.dessert.prix) ? 0 : vm.currentMeal.dessert.prix);
+                        (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix) +
+                        (angular.isUndefined(vm.currentMeal.dessert.prix) ? 0 : vm.currentMeal.dessert.prix);
     vm.currentMeal.pizza = null;
     vm.currentMeal.drink = null;
     vm.currentMeal.dessert=null;

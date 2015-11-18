@@ -10,15 +10,15 @@
     'pzWebAdminApp.order',
     'pzWebAdminApp.product',
     'pzWebAdminApp.user',
-
     'ProductService',
     'PizzaService',
     'DrinkService',
     'DessertService',
     'IngredientsService',
     'CommandeService',
-    'CommandService'
-
+    'CommandService',
+    'pzWebAdminApp.cuisine',
+    'CommandePizzaService'
   ]);
 
 angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
