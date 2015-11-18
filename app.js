@@ -14,22 +14,14 @@
     'ProductService',
     'PizzaService',
     'DrinkService',
-
-    'CommandService',
-
-
-
     'DessertService',
     'IngredientsService',
-    'CommandeService'
+    'CommandeService',
+    'CommandService'
 
   ]);
 
-angular.module('pzWebAdminApp').config(function($httpProvider,$urlRouterProvider, $locationProvider) {
-  $httpProvider.defaults.headers.common = {};
-//  $httpProvider.defaults.headers.post = {};
-  $httpProvider.defaults.headers.put = {};
-  $httpProvider.defaults.headers.patch = {};
+angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
     // $locationProvider.html5Mode(true);
     // Ici, les routes générales de l'application
     // Pas de route spécifique ici !
