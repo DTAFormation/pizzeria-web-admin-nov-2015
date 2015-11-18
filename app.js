@@ -16,9 +16,9 @@
     'DessertService',
     'IngredientsService',
     'CommandeService',
+    'CommandService',
     'pzWebAdminApp.cuisine',
-    'CommandePizzaService',
-    'pzWebAdminApp.filters'
+    'CommandePizzaService'
   ]);
 
 angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
