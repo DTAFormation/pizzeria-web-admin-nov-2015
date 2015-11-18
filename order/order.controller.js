@@ -130,8 +130,6 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
   vm.listAll = function() {
     vm.items = vm.pizzas.concat(vm.drinks);
-    console.log(vm.pizzas);
-    vm.items = vm.pizzas;
   };
   vm.listDrinks = function() {
     vm.items = vm.drinks;
