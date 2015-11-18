@@ -5,7 +5,7 @@
     'ui.router',
 
     'pzWebAdminApp.shared',
-    'pzWebAdminApp.filters'
+    'pzWebAdminApp.filters',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
     'pzWebAdminApp.product',
@@ -16,7 +16,8 @@
     'DrinkService',
     'DessertService',
     'IngredientsService',
-    'CommandeService'
+    'CommandeService',
+    'CommandService'
 
   ]);
 
