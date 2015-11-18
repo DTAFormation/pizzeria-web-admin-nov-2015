@@ -72,4 +72,10 @@ angular.module('CommandeService', []).service('CommandeService', function($http)
             return $http.get('http://localhost:8080/commandesPretes')
             .then(handleResponse)
     }
+
+    this.updateToTermine= function (commande) {
+    		commande.etat="TERMINE";
+            return $http.put('http://localhost:8080/command', commande)
+            .then(handleResponse)
+    }
 });
