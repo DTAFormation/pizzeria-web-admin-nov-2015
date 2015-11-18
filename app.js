@@ -5,19 +5,20 @@
     'ui.router',
 
     'pzWebAdminApp.shared',
-    'pzWebAdminApp.filters'
+    'pzWebAdminApp.filters',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
     'pzWebAdminApp.product',
     'pzWebAdminApp.user',
-
     'ProductService',
     'PizzaService',
     'DrinkService',
     'DessertService',
     'IngredientsService',
-    'CommandeService'
-
+    'CommandeService',
+    'pzWebAdminApp.cuisine',
+    'CommandePizzaService',
+    'pzWebAdminApp.filters'
   ]);
 
 angular.module('pzWebAdminApp').config(function($urlRouterProvider, $locationProvider) {
