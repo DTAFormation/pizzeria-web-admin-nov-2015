@@ -43,17 +43,17 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   })
   .state('orderReady', {
     url: '/ready',
-    views: {
-      "": {
-        templateUrl: 'order/viewsReady/liste.order.html',
-        controller: 'ReadyController',
-        controllerAs: 'ctrl'
-      }
-    }
-  });
+    templateUrl: 'order/viewsReady/liste.order.html',
+    controller: 'ReadyController',
+    controllerAs: 'ctrl'
+    // views: {
+    //   "": {
+    //
+    //   }
+    // }
+  })
 
-   $stateProvider
-        .state("orderdelivered", {
+.state("orderdelivered", {
             url: '/orderdelivered',
              templateUrl: 'order/views/list-order-delivered.html',
         controller: 'OrderDeliveredController',
@@ -162,33 +162,4 @@ self.commandesalivrer = results;
 
 }.bind(this));
 
-  // self.commandesalivrer = [
-  //   {
-  //     id:"1",
-  //     id_Client: 1,
-  //     type:"livraison",
-  //     total:12.50,
-  //     paiement:"espèces",
-  //     paye:false,
-  //     etat:"livraison"
-  //   },
-  //    {
-  //     id:"2",
-  //     id_Client: 12,
-  //     type:"livraison",
-  //     total:50.00,
-  //     paiement:"carte",
-  //     paye:true,
-  //     etat:"prepare"
-  //   },
-  //    {
-  //     id:"3",
-  //     id_Client: 12,
-  //     type:"livraison",
-  //     total:100.20,
-  //     paiement:"carte",
-  //     paye:false,
-  //     etat:"livraison"
-  //   }
-  // ]
 });
