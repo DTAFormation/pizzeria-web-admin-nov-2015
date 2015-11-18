@@ -109,7 +109,7 @@ self.select = function(commande){
 console.log(commande)
 }  
 
-CommandeService.getCommande().then(function(results){
+CommandeService.getCommandes().then(function(results){
 
 self.commandesalivrer = results;
 
