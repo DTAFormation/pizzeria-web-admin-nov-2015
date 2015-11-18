@@ -9,7 +9,7 @@
 		<!-- Détail du produit sélectionner -->
 		<div class="row col-lg-12 form-group">
 
-			<form name="ctrl.ingredientForm" ng-submit="ctrl.saveIngredient()" novalidate>
+			<form ng-model="ctrl.ingredientForm" ng-submit="ctrl.saveIngredient()" novalidate>
 				<div ng-show="ctrl.ingredientForm.$invalid && ctrl.ingredientForm.$dirty">
 					<h1>Les champs avec * sont obligatoires</h1>
 				</div>

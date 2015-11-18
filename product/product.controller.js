@@ -52,7 +52,7 @@ angular.module('pzWebAdminApp.product').config(function($stateProvider, $urlRout
       parent:'product'
     }
   })
-    .state('product.listingredient', {
+  .state('product.listingredient', {
     views: {
       'show': {
         templateUrl: 'product/views/ingredientlist.html',
@@ -74,22 +74,27 @@ angular.module('pzWebAdminApp.product').config(function($stateProvider, $urlRout
 angular.module('pzWebAdminApp.product').controller('productController', function($state, PizzaService, DrinkService,DessertService,IngredientsService,ProductService) {
   var ctrl=this;
   $state.transitionTo('product.list');
-   
-  PizzaService.getPizzaList().then(function ihaveit(response){
-  ctrl.pizzas = response  
-  });
   
-  DrinkService.getDrinkList().then(function ihaveit(response){
-  ctrl.boissons = response  
-  });
 
-  DessertService.getDessertList().then(function ihaveit(response){
-  ctrl.desserts = response  
-  });
+  ctrl.listupdate=function(){
+    PizzaService.getPizzaList().then(function ihaveit(response){
+      ctrl.pizzas = response  
+    });
+    
+    DrinkService.getDrinkList().then(function ihaveit(response){
+      ctrl.boissons = response  
+    });
 
-  IngredientsService.getIngredientList().then(function ihaveit(response){
-  ctrl.ingredientsProducts = response  
-  });
+    DessertService.getDessertList().then(function ihaveit(response){
+      ctrl.desserts = response  
+    });
+
+    IngredientsService.getIngredientList().then(function ihaveit(response){
+      ctrl.ingredientsProducts = response  
+    });
+  }
+
+  ctrl.listupdate();
 
 //Initialisation de variable pour les formulaires
 ctrl.typeProducts=[ {
@@ -129,9 +134,7 @@ ctrl.formatProducts=[ {
 ],
 
 //Pour selectionner les ingredients sur le formulaire d'ajout de produit
-  ctrl.listingredientForm=[]
-
-
+ctrl.listingredientForm=[]
 
 //BOUTON
 
@@ -143,71 +146,80 @@ ctrl.formatProducts=[ {
 
         //Bouton modifier du détail du produit
         ctrl.modifier=function(item){
-           $state.transitionTo('product.modifproduct');
-        }
+         $state.transitionTo('product.modifproduct');
+       }
 
         //Bouton supprimer du détail du produit
         ctrl.supprimer=function(id){
-           ProductService.deleteProduct(id).then(function ihaveit(response){
-            $state.transitionTo('product.list');
-          });
-        }
+         ProductService.deleteProduct(id).then(function ihaveit(response){
+          ctrl.listupdate();
+          $state.transitionTo('product.list');
+        });
+       }
 
     //Pour la vue liste ingredient
-        ctrl.supprimerIngredient=function(item){
-          IngredientsService.deleteIngredient(id).then(function ihaveit(response){
-            $state.transitionTo('product.listingredient'); 
-          });       
-        }
+    ctrl.supprimerIngredient=function(item){
+      IngredientsService.deleteIngredient(id).then(function ihaveit(response){
+        ctrl.listupdate();
+        $state.transitionTo('product.listingredient'); 
+      });       
+    }
 
     //Pour le formulaire d'ajout d'un produit et modification
-        ctrl.save = function() {
-          if(this.productForm.$invalid){
-            alert("Erreur")
-            return
-          }
-          ctrl.productForm.ingredients=ctrl.listingredientForm
+    ctrl.save = function() {
+      if(this.productForm.$invalid){
+        alert("Erreur")
+        return
+      }
+          // ctrl.productForm.ingredients=ctrl.listingredientForm TODO
 
           ProductService.saveProduct(ctrl.productForm).then(function ihaveit(response){
-            $state.transitionTo('product.list'); 
+            ctrl.productForm=null;
+            ctrl.listupdate();
+            $state.transitionTo('product.list');
           }); 
 
         };
 
         ctrl.updateProduit = function() {
-          if(this.productForm.$invalid){
+          if(this.produitSelectionner.$invalid){
             alert("Erreur")
             return
           }
-           ctrl.productForm.ingredients=ctrl.listingredientForm
+          
 
-          ProductService.updateProduct(ctrl.productForm).then(function ihaveit(response){
+          ProductService.updateProduct(ctrl.produitSelectionner).then(function ihaveit(response){
+            ctrl.produitSelectionner=null;
+            ctrl.listupdate();
             $state.transitionTo('product.list');
           }); 
 
         };
 
     //Pour le formulaire d'ajout d'un ingredient
-        ctrl.saveIngredient = function() {
-          if(this.ingredientForm.$invalid){
-            alert("Erreur")
-            return
-          }
+    ctrl.saveIngredient = function() {
+      if(this.ingredientForm.$invalid){
+        alert("Erreur")
+        return
+      }
 
-          IngredientsService.saveIngredient(ctrl.ingredientForm).then(function ihaveit(response){
-             $state.transitionTo('product.listingredient');
-          }); 
-         
-        }
+      IngredientsService.saveIngredient(ctrl.ingredientForm).then(function ihaveit(response){
+       ctrl.ingredientForm=null;
+       ctrl.listupdate();
+       $state.transitionTo('product.listingredient');
+     }); 
+      
+    }
 
     //Pour la suppression d'un ingredient
     ctrl.suppressionimerIngredient=function(id){
 
-         IngredientsService.deleteIngredient(id).then(function ihaveit(response){
-             $state.transitionTo('product.listingredient');
-          }); 
-    }
+     IngredientsService.deleteIngredient(id).then(function ihaveit(response){
+      ctrl.listupdate();
+      $state.transitionTo('product.listingredient');
+    }); 
+   }
 
 
-});
+ });
 

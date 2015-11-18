@@ -10,7 +10,7 @@
 		
 		<div class="row col-lg-12 form-group">
 
-			<form name="ctrl.productForm" ng-submit="ctrl.save()" novalidate>
+			<form ng-model="ctrl.productForm" ng-submit="ctrl.save()" novalidate>
 				<div ng-show="ctrl.productForm.$invalid && ctrl.productForm.$dirty">
 					<h1>Les champs avec * sont obligatoires</h1>
 				</div>
@@ -28,14 +28,14 @@
 				</select>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group" ng-show="ctrl.productForm.type=='PIZZA'">
 				<label for="taille">Taille (Pizza):</label>
 					<select  class="form-control" id="taille" name="taille" ng-model="ctrl.productForm.taille">
       					<option ng-repeat="tailleproduct in ctrl.tailleProducts" value="{{tailleproduct.nom}}">{{tailleproduct.nom}}</option>
     				</select>
 		</div>
 
-		<div class="form-group">
+		<div class="form-group" ng-show="ctrl.productForm.type=='BOISSON'">
 			<label for="format">Format (Boisson):</label>
 					<select  class="form-control" id="format" name="format" ng-model="ctrl.productForm.format">
       					<option ng-repeat="formatproduct in ctrl.formatProducts" value="{{formatproduct.nom}}">{{formatproduct.nom}}</option>
