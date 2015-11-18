@@ -5,6 +5,7 @@ angular.module('pzWebAdminApp', [
     'pzWebAdminApp.shared',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
+    'pzWebAdminApp.user',
     'ui.router',
     'PizzaService',
     'DrinkService',

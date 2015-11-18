@@ -9,7 +9,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
   $stateProvider
   .state('order', {
     url: '/order',
-    abstrat: true,
+    abstract: true,
     views: {
       "": {
         templateUrl: 'order/views/order.html',
@@ -40,6 +40,16 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
     views: {
       'newOrderForm': {
         templateUrl: 'order/views/pizza.order.html'
+      }
+    }
+  })
+  .state('orderReady', {
+    url: '/ready',
+    views: {
+      "": {
+        templateUrl: 'order/viewsReady/liste.order.html',
+        controller: 'ReadyController',
+        controllerAs: 'ctrl'
       }
     }
   });
