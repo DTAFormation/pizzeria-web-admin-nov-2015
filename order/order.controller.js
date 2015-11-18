@@ -100,6 +100,8 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.newOrder.paye = "false";
     vm.newOrder.etat = "EN_COURS";
     CommandService.saveCommand(vm.newOrder);
+    vm.currentMeal.pizza = null;
+    vm.currentMeal.drink = null;
     $state.transitionTo('order.form');
 
 
