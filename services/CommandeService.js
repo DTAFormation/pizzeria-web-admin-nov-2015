@@ -64,12 +64,21 @@ angular.module('CommandeService', []).service('CommandeService', function($http)
 	};
 	*/
 
+
+
+
 	function handleResponse(response) {
         return response.data
     }
 
     this.getCommandes= function () {
             return $http.get('http://localhost:8080/commandesPretes')
+            .then(handleResponse)
+    }
+
+    this.updateToTermine= function (commande) {
+    		commande.etat="TERMINE";
+            return $http.put('http://localhost:8080/command', commande)
             .then(handleResponse)
     }
 });

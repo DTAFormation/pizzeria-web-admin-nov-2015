@@ -23,31 +23,37 @@ angular.module('pzWebAdminApp.user').config(function($stateProvider) {
             controllerAs: "ctrl"
         });
 });
+
 angular.module("pzWebAdminApp.user").controller("userController",function($state,userService){
 	var ctrl=this;
 
-
-    ctrl.types=["Administrateur","Utilisateur"];
-	ctrl.users=[{id:2,nom:"simon",type:"admin"},{id:2,nom:"olivier",type:"paysan"}];
+    ctrl.types=[{key:"ADMINISTRATEUR",value:"Administrateur"},{key:"EMPLOYEE",value:"Employée"}];
+    
+    userService.findAll().then(function(response){ctrl.users=response});
 
     ctrl.save=function(){
-        userService.addUser(ctrl.user);
-        $state.transitionTo("user")
+        userService.addUser(ctrl.user).then(function(){
+            $state.transitionTo("user");
+        });
     }
 });
-angular.module("pzWebAdminApp.user").controller("modifyUserController",function($state,$routeParams,userService){
+
+angular.module("pzWebAdminApp.user").controller("modifyUserController",function($state,$stateParams,userService){
     var ctrl=this;
-    var idUser=$routeParams.id;
+    var id=$stateParams.id;
 
-    ctrl.user=userService.findOne(idUser);
-    ctrl.types=["Administrateur","Utilisateur"];
+    userService.findOne(id).then(function(response){ctrl.user=response});
 
+    ctrl.types=[{key:"ADMINISTRATEUR",value:"Administrateur"},{key:"EMPLOYEE",value:"Employée"}];
+    
     ctrl.save=function(){
-        userService.updateUser(ctrl.user);
-        $state.transitionTo("user");
+        userService.updateUser(ctrl.user).then(function(){
+            $state.transitionTo("user");
+        });
     }
     ctrl.delete=function(){
-        userService.deleteUser(ctrl.user);
-        $state.transitionTo("user");
+        userService.deleteUser(ctrl.user.id).then(function(){
+            $state.transitionTo("user");
+        });
     }
 })

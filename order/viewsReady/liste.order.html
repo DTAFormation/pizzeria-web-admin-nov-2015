@@ -3,6 +3,8 @@
 	<thead>
 		<tr>
 			<th>Id</th>
+			<th>Commande</th>
+			<th>Client</th>
 			<th>Type</th>
 			<th>Paiement</th>
 			<th>Reglee?</th>
@@ -13,6 +15,10 @@
 	<tbody>
 		<tr ng-repeat="tab in ctrl.pizzaPretes">
 			<td>{{tab.id}}</td>
+			<td>Les Produits:<br><span ng-repeat="tabProduits in tab.produits">{{tabProduits.nom}} - {{tabProduits.prix}}€<br></span><br>
+				Les Menus: <br><span ng-repeat="tabMenus in tab.menus">{{tabMenus.nom}} - {{tabMenus.prix}}€<br></span><br>
+				Total: {{tab.total}}€</td>
+			<td>{{tab.client.login}} - ({{tab.client.prenom}} {{tab.client.nom}})</td>
 			<td>{{tab.type}}</td>
 			<td>{{tab.paiement}}</td>
 			<td>{{tab.paye}}</td>
