@@ -53,3 +53,7 @@ body{
 .product a:visited{
     color: white;
 }
+
+input.ng-invalid.ng-dirty{
+    box-shadow: 0 0 6px red;
+}
