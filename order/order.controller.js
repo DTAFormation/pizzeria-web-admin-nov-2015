@@ -3,7 +3,6 @@ angular.module('pzWebAdminApp.order', [
   'PizzaService',
   'DrinkService',
   'CommandService',
-  'CommandeService',
   'DessertService'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
@@ -157,24 +156,22 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandeService) {
+angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandService) {
   var self = this;
    $state.transitionTo('orderdelivered');
 
   self.title = "BLABLA";
 
 self.select = function(commande){
-
-  if(commande.etat=="LIVRAISON") {
-      commande.etat="TERMINE";
-    }
-  else {
+  if(commande.etat=="PREPARE"){
     commande.etat ="LIVRAISON";
-    }
-  CommandeService.updateCommande(commande);
+  }else if(commande.etat=="LIVRAISON") {
+    commande.etat="TERMINE";
+  }
+  CommandService.updateCommande(commande);
 };
 
-CommandeService.getCommandesPretesLivraison().then(function(results){
+CommandService.getCommandesPretesLivraison().then(function(results){
 
 self.commandesalivrer = results;
 

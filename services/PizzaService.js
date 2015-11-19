@@ -1,12 +1,11 @@
-angular.module('PizzaService', []).service('PizzaService', function($http,$q) {
-  var url = 'http://localhost:8080/pizza';
+angular.module('PizzaService', []).service('PizzaService', function($http,$q, pzConfig) {
 
   function handleResponse(response) {
     return response.data;
   }
 
   this.getPizzaList=function(){
-    return $http.get('http://localhost:8080/pizza')
+    return $http.get(pzConfig.PIZZA_RESOURCE_URL)
     .then(handleResponse);
   };
 

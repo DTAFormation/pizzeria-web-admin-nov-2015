@@ -1,7 +1,6 @@
 angular.module('pzWebAdminApp.cuisine', [
   'ui.router',
-  'PizzaService',
-  'CommandePizzaService'
+  'PizzaService'
 ]);
 angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRouterProvider) {
 
@@ -21,15 +20,15 @@ angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRout
 
 
 
-angular.module('pzWebAdminApp.cuisine').controller('CuisineController', function($state, CommandePizzaService) {
+angular.module('pzWebAdminApp.cuisine').controller('CuisineController', function($state, CommandService) {
   var vm = this;
-  CommandePizzaService.getCommandesPizzas()
+  CommandService.getCommandesPizzasEnCours()
   .then(function(commandes){
     vm.commandesPizza = commandes;
   }.bind(this))
 
   this.validerPreparation = function(commande){
       commande.etat="PREPARE";
-      CommandePizzaService.updateCommande(commande);
+      CommandService.updateCommande(commande);
     }
   });
