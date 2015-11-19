@@ -1,4 +1,4 @@
-// Déclaration du module 'home'
+﻿// Déclaration du module 'home'
 angular.module('pzWebAdminApp.home', [
     'ngRoute',
     'pzWebAdminApp.shared',
@@ -22,9 +22,8 @@ angular.module('pzWebAdminApp.home').config(function($stateProvider) {
         $(".dropdown").on("show.bs.dropdown", function(event){
             var x = $(event.relatedTarget).text(); // Get the button text
         });
+
     });
-
-
 
 });
 

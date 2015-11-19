@@ -1,5 +1,8 @@
 # Pizzeria Web Admin
-Application Web de vente de pizzas
+Application Web de vente de pizzas utilisée par les employés de la pizzéria
+
+Application déployée automatiquement via [Jenkins](http://ns377570.ip-5-196-89.eu:8088/jenkins/) --> [Testez ici !](http://dtaformation.github.io/pizzeria-web-admin-nov-2015/)  
+Accès à la plateforme [Sonar](http://ns377570.ip-5-196-89.eu:9000/)
 
 ## Prérequis
 * Installer NodeJS et NPM

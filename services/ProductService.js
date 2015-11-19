@@ -1,21 +1,21 @@
-angular.module('ProductService', []).service('ProductService', function($http,$q) {
+angular.module('ProductService', []).service('ProductService', function($http,$q, pzConfig) {
 
   function handleResponse(response) {
     return response.data
   }
 
   this.deleteProduct=function(id){
-    return $http.delete('http://localhost:8080/product/'+id)
+    return $http.delete(pzConfig.PRODUCT_RESOURCE_URL+'/'+id)
     .then(handleResponse)
   }
 
   this.updateProduct=function(produit){
-    return $http.put('http://localhost:8080/product',produit)
+    return $http.put(pzConfig.PRODUCT_RESOURCE_URL,produit)
     .then(handleResponse)
   }
 
   this.saveProduct=function(produit){
-    return $http.post('http://localhost:8080/product',produit)
+    return $http.post(pzConfig.PRODUCT_RESOURCE_URL,produit)
     .then(handleResponse)
   }
 });

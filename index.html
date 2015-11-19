@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="template/CSS/style_perso.css"> 
+  <link rel="stylesheet" href="template/CSS/style_perso.css">
 </head>
-<body class="container-fluid">
+<body class="container">
 
   <!-- JS from Bower Components -->
   <script src="lib/angular/angular.js"></script>
@@ -26,18 +26,22 @@
   <script src="app.js"></script>
   <script src="shared/shared.js"></script>
   <script src="shared/service/user.service.js"></script>
+  <script src="shared/service/config.service.js"></script>
   <script src="order/order.controller.js"></script>
+  <script src="order/ready.controller.js"></script>
+  <script src="user/user.controller.js"></script>
   <script src="product/product.controller.js"></script>
   <script src="home/home.js"></script>
   <script src="home/service/home.service.js"></script>
+  <script src="cuisine/cuisine.controller.js"></script>
+  <!--<script src="user/service/user.service.js"></script>-->
   <script src="services/PizzaService.js"></script>
   <script src="services/DrinkService.js"></script>
   <script src="services/DessertService.js"></script>
   <script src="services/IngredientsService.js"></script>
   <script src="services/ProductService.js"></script>
+  <script src="services/CommandService.js"></script>
   <script src="filters/PizzaFilter.js"></script>
-
-  <div ng-include="'template/scripts.html'"></div>
 
   <!-- Add New Component JS Above -->
   <header ng-include="'template/header.html'"></header>

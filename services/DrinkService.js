@@ -1,12 +1,13 @@
-angular.module('DrinkService', []).service('DrinkService', function($http,$q) {
-
+angular.module('DrinkService', []).service('DrinkService', function($http,$q, pzConfig) {
+  
   function handleResponse(response) {
-    return response.data
+    return response.data;
   }
 
   this.getDrinkList=function(){
-    return $http.get('http://localhost:8080/drink')
-    .then(handleResponse)
-  }
+    return $http.get(pzConfig.DRINK_RESOURCE_URL)
+    .then(handleResponse);
+  };
+
 
 });

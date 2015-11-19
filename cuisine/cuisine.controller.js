@@ -1,0 +1,34 @@
+angular.module('pzWebAdminApp.cuisine', [
+  'ui.router',
+  'PizzaService'
+]);
+angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+  .state('cuisine', {
+    url: '/cuisine',
+    views: {
+      "": {
+        templateUrl: 'cuisine/views/cuisine.html',
+        controller: 'CuisineController',
+        controllerAs: 'ctrl'
+      }
+    }
+  })
+
+  });
+
+
+
+angular.module('pzWebAdminApp.cuisine').controller('CuisineController', function($state, CommandService) {
+  var vm = this;
+  CommandService.getCommandesPizzasEnCours()
+  .then(function(commandes){
+    vm.commandesPizza = commandes;
+  }.bind(this))
+
+  this.validerPreparation = function(commande){
+      commande.etat="PREPARE";
+      CommandService.updateCommande(commande);
+    }
+  });

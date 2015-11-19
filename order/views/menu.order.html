@@ -1,27 +1,53 @@
 <h2>New Menu</h2>
-<form ng-submit="ctrl.save()" name="ctrl.newOrder" novalidate>
+
+<form ng-submit="ctrl.save()" name="ctrl.currentMealForm" novalidate>
 
         <label for="">Pizza</label>
-       <input type="text" ng-model="ctrl.newOrder.pizzaName">
+       <input type="text" ng-model="ctrl.currentMeal.pizza.nom" value="test">
+       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.taille">
+        <option value="MOYEN">M</option>
+        <option value="LARGE">L</option>
+        <option value="XLARGE">XL</option>
+      </select><br>
+
 
        <label for="">Drink</label>
-       <input class="focusedInput" autofocus="autofocus" type="text" ng-model="ctrl.newOrder.drinkName">
+       <input type="text" ng-model="ctrl.currentMeal.drink.nom">
+       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.format">
+        <option value="NORMAL">N</option>
+        <option value="XL">L</option>
+      </select><br>
+        <!-- <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="NORMAL"/>NORMAL
+        <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="XL"/>XL -->
+
+        <label for="">Dessert</label>
+       <input type="text" ng-model="ctrl.currentMeal.dessert.nom"><br>
 
        <button type="submit">Save</button>
-       <!-- <label for="">type</label>
-       <select ng-model="action.type"
-           ng-options="typeAction for typeAction in ctrl.typeActions"></select>
 
-       <label for="">parameters</label>
-       <textarea ng-model="action.params"></textarea>
-
-       <button type="button" ng-click="ctrl.removeAction($index)">Delete</button>
-   </p>
-   <button type="button" ng-click="ctrl.addAction()">Add action</button>
-
-   <p>
-       <button type="submit">Save</button>
-       <button type="button" ng-click="ctrl.delete()">Delete</button>
-   </p> -->
 
 </form>
+
+<label for="">Commande</label>
+<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.type">
+ <option value="LIVRAISON">Livraison</option>
+ <option value="SUR_PLACE">Sur place</option>
+ <option value="A_EMPORTER">A emporter</option>
+</select><br>
+
+<label for="">Paiement</label>
+<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.paiement">
+ <option value="EN_LIGNE">En ligne</option>
+ <option value="CARTE">Carte</option>
+ <option value="LIQUIDE">Liquide</option>
+</select><br>
+
+<button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>
+<label for="">Total</label>
+<input type="text" ng-model="ctrl.newOrder.total"></input>
+<div class="row">
+      <ul class="list-group">
+
+        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder.produits track by $index">
+          {{item.nom}}
+</div>

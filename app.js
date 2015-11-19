@@ -1,17 +1,22 @@
-angular.module('pzWebAdminApp', [
+﻿angular.module('pzWebAdminApp', [
     'ui.utils',
     'ngRoute',
     'ngAnimate',
+    'ui.router',
+
     'pzWebAdminApp.shared',
+    'pzWebAdminApp.filters',
     'pzWebAdminApp.home',
     'pzWebAdminApp.order',
     'pzWebAdminApp.product',
-    'ui.router',
+    'pzWebAdminApp.user',
+    'ProductService',
     'PizzaService',
     'DrinkService',
     'DessertService',
     'IngredientsService',
-    'ProductService',
+    'CommandService',
+    'pzWebAdminApp.cuisine',
     'pzWebAdminApp.filters'
   ]);
 
