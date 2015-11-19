@@ -1,13 +1,13 @@
-angular.module('pzWebAdminApp.order').controller('ReadyController', function($state, PizzaService, DrinkService, CommandeService){
+angular.module('pzWebAdminApp.order').controller('ReadyController', function($state, PizzaService, DrinkService, CommandService){
   this.pizzaPretes = {};
 
-  CommandeService.getCommandesPretesCaisse()
+  CommandService.getCommandesPretesCaisse()
     .then(function (commandes) {
         this.pizzaPretes = commandes;
     }.bind(this));
 
     this.validerDistribution = function(commande){
       commande.etat="TERMINE";
-      CommandeService.updateCommande(commande);
+      CommandService.updateCommande(commande);
     };
 });

@@ -15,9 +15,8 @@
     'DrinkService',
     'DessertService',
     'IngredientsService',
-    'CommandeService',
+    'CommandService',
     'pzWebAdminApp.cuisine',
-    'CommandePizzaService',
     'pzWebAdminApp.filters'
   ]);
 
