@@ -93,14 +93,11 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   vm.select = function(item) {
     if ("PIZZA" === item.type) {
       vm.currentMeal.pizza = item;
-      }
-    else if ("BOISSON" === item.type){
+    }else if ("BOISSON" === item.type){
       vm.currentMeal.drink = item;
-      }
-    else {
+    }else {
       vm.currentMeal.dessert = item;
     }
-
   };
 
   vm.validate = function() {
@@ -153,7 +150,6 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   vm.listDesserts = function() {
     vm.items = vm.desserts;
   };
-
 });
 
 angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandService) {
@@ -168,13 +164,20 @@ self.select = function(commande){
   }else if(commande.etat=="LIVRAISON") {
     commande.etat="TERMINE";
   }
-  CommandService.updateCommande(commande);
+  CommandService.updateCommande(commande)
+    .then(function success(){
+      self.updatePage();
+    })
 };
 
-CommandService.getCommandesPretesLivraison().then(function(results){
+self.updatePage = function(){
+  CommandService.getCommandesPretesLivraison().then(function(results){
 
-self.commandesalivrer = results;
+    self.commandesalivrer = results;
 
-}.bind(this));
+  }.bind(this));
+};
+
+self.updatePage();
 
 });

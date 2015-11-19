@@ -1,13 +1,21 @@
 angular.module('pzWebAdminApp.order').controller('ReadyController', function($state, PizzaService, DrinkService, CommandService){
-  this.pizzaPretes = {};
+  var ctrl = this;
+  ctrl.pizzaPretes = {};
 
-  CommandService.getCommandesPretesCaisse()
+  ctrl.listUpdate = function (){
+  	CommandService.getCommandesPretesCaisse()
     .then(function (commandes) {
-        this.pizzaPretes = commandes;
-    }.bind(this));
+        ctrl.pizzaPretes = commandes;
+    }.bind(ctrl));
+  };
 
-    this.validerDistribution = function(commande){
+  ctrl.listUpdate();
+
+    ctrl.validerDistribution = function(commande){
       commande.etat="TERMINE";
-      CommandService.updateCommande(commande);
+      CommandService.updateCommande(commande)
+      	.then(function success(response){
+      		ctrl.listUpdate();
+      })
     };
 });
