@@ -1,53 +1,85 @@
-<h2>New Menu</h2>
+<div class="orderform">
+    <h2>Nouveau Menu</h2>
 
-<form ng-submit="ctrl.save()" name="ctrl.currentMealForm" novalidate>
+  <form ng-submit="ctrl.save()" name="ctrl.currentMealForm" novalidate>
 
-        <label for="">Pizza</label>
-       <input type="text" ng-model="ctrl.currentMeal.pizza.nom" value="test">
-       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.taille">
-        <option value="MOYEN">M</option>
-        <option value="LARGE">L</option>
-        <option value="XLARGE">XL</option>
+
+    <div class="row">
+      <article  class="form-group col-lg-5">
+        <label for="" class="control-label">Pizza</label><br>
+         <input class="form-control" type="text" ng-model="ctrl.currentMeal.pizza.nom" value="test">
+         <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.taille">
+          <option value="MOYEN">M</option>
+          <option value="LARGE">L</option>
+          <option value="XLARGE">XL</option>
+        </select>
+      </article>
+      <article  class="form-group col-lg-5">
+        <label for="" class="control-label">Boisson</label><br>
+          <input class="form-control" type="text" ng-model="ctrl.currentMeal.drink.nom">
+          <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.format">
+          <option value="NORMAL">N</option>
+          <option value="XL">L</option>
+         </select>
+      </article>
+
+    </div>
+
+      <div class="row">
+        <article class="form-group col-lg-7">
+          <label for="" class="control-label">Dessert</label>
+          <input class="form-control" type="text" ng-model="ctrl.currentMeal.dessert.nom"><br>
+        </article>
+
+        <article class="form-group col-lg-5">
+          <button class="btn btn-primary btn-lg" type="submit">Save</button>
+        </article>
+
+
+      </div>
+          <!-- <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="NORMAL"/>NORMAL
+          <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="XL"/>XL -->
+
+    <div class="row">
+      <article class="form-group col-lg-5">
+        <label for="" class="control-label">Commande</label>
+        <select name="multipleSelect" id="multipleSelect" ng-change="ctrl.showClient(ctrl.newOrder.type)" ng-model="ctrl.newOrder.type">
+         <option value="LIVRAISON">Livraison</option>
+         <option value="SUR_PLACE">Sur place</option>
+         <option value="A_EMPORTER">A emporter</option>
+        </select><br>
+
+        <div ng-if="ctrl.newOrder.type=='LIVRAISON'">
+          <!-- <div ui-view="clientForm"></div>
+
+        </div> -->
+        <span class="label label-default">Nom</span>
+        <input class="form-control" type="text" ng-model="ctrl.newOrder.client.nom">
+        <span class="label label-default">Prenom Client</span>
+        <input class="form-control" ng-change="ctrl.updateClient(ctrl.newOrder.client.nom, ctrl.newOrder.client.prenom)" type="text" ng-model="ctrl.newOrder.client.prenom">
+        <span class="label label-default">Adresse Client</span>
+        <input class="form-control" type="text" ng-model="ctrl.newOrder.client.addr">
+        <span class="label label-default">Tel. Client</span>
+        <input class="form-control" type="text" ng-model="ctrl.newOrder.client.tel">
+      </article>
+
+      <label for="" class="control-label">Paiement</label><br>
+      <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.paiement">
+       <option value="EN_LIGNE">En ligne</option>
+       <option value="CARTE">Carte</option>
+       <option value="LIQUIDE">Liquide</option>
       </select><br>
+    </div>
 
 
-       <label for="">Drink</label>
-       <input type="text" ng-model="ctrl.currentMeal.drink.nom">
-       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.currentMeal.format">
-        <option value="NORMAL">N</option>
-        <option value="XL">L</option>
-      </select><br>
-        <!-- <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="NORMAL"/>NORMAL
-        <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="XL"/>XL -->
+    <button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>
+    <span class="label label-default">Total</span>
+    <input class="form-control" type="text" ng-model="ctrl.newOrder.total" disabled></input>
+  </form>
+  <div class="row">
+        <ul class="list-group">
 
-        <label for="">Dessert</label>
-       <input type="text" ng-model="ctrl.currentMeal.dessert.nom"><br>
-
-       <button type="submit">Save</button>
-
-
-</form>
-
-<label for="">Commande</label>
-<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.type">
- <option value="LIVRAISON">Livraison</option>
- <option value="SUR_PLACE">Sur place</option>
- <option value="A_EMPORTER">A emporter</option>
-</select><br>
-
-<label for="">Paiement</label>
-<select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.paiement">
- <option value="EN_LIGNE">En ligne</option>
- <option value="CARTE">Carte</option>
- <option value="LIQUIDE">Liquide</option>
-</select><br>
-
-<button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>
-<label for="">Total</label>
-<input type="text" ng-model="ctrl.newOrder.total"></input>
-<div class="row">
-      <ul class="list-group">
-
-        <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder.produits track by $index">
-          {{item.nom}}
+          <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder.produits track by $index">
+            {{item.nom}}
+  </div>
 </div>

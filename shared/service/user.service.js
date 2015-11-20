@@ -20,7 +20,10 @@
         // TODO Gestion de la déconnexion
     };
 
-
+    this.findOneByNomAndPrenom = function(nom, prenom) {
+      return $http.get(url+'/'+nom+'?'+prenom)
+      .then(handleResponse);
+    };
     this.findOne=function(id){
         return $http.get(url +"/"+ id)
             .then(handleResponse);

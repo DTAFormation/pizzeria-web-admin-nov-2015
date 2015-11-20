@@ -17,27 +17,27 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
         controller: 'OrderController',
         controllerAs: 'ctrl'
       }
-    }
-  })
-  .state('order.form', {
-    url: '',
-    views: {
-      'info@order': {
-        templateUrl: 'order/views/info.order.html'
-      }
+      // 'newOrderForm': {
+      //   templateUrl: 'order/views/menu.order.html'
+      // }
     }
   })
   .state('order.menu', {
+    url: "",
     views: {
       'newOrderForm': {
         templateUrl: 'order/views/menu.order.html'
       }
+      // 'clientForm@order.menu': {
+      //   tremplateUrl: 'order/views/client.order.html'
+      // }
     }
   })
-  .state('order.pizza', {
+  .state('order.clientForm', {
+    parent:'order.menu',
     views: {
-      'newOrderForm': {
-        templateUrl: 'order/views/pizza.order.html'
+      'clientForm': {
+        tremplateUrl: 'order/views/client.order.html'
       }
     }
   })
@@ -66,7 +66,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
 
 angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService, DessertService) {
   var vm = this;
-  $state.transitionTo('order.form');
+  $state.transitionTo('order.menu');
 
   vm.currentMeal=[];
 
@@ -103,6 +103,59 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
   };
 
+  vm.clients = [
+      {
+        "nom":"Winchester",
+        "prenom": "Dean",
+        "addr":"Lawrence",
+        "tel": "064164646",
+        "login": "DeanW",
+        "mdp":"mdp"
+      },
+      {
+        "nom":"Winchester",
+        "prenom": "Sam",
+        "addr":"Lawrence",
+        "tel": "064164646",
+        "login": "SamW",
+        "mdp":"mdp"
+      },
+      {
+        "nom":"Winchester",
+        "prenom": "John",
+        "addr":"Lawrence",
+        "tel": "064164646",
+        "login": "JohnW",
+        "mdp":"mdp"
+      },
+      {
+        "nom":"Dunno",
+        "prenom": "Bobby",
+        "addr":"Lawrence",
+        "tel": "064164646",
+        "login": "BobbyD",
+        "mdp":"mdp"
+      }
+    ];
+
+  vm.showClient = function(type) {
+    console.log(type);
+    if (type === 'LIVRAISON') {
+      console.log($state.current.name);
+      $state.transitionTo('order.clientForm');
+      console.log($state.current.name);
+    }
+  };
+
+  vm.updateClient = function(nom, prenom) {
+    for (var i in vm.clients) {
+      if (vm.clients[i].nom === nom &&
+          vm.clients[i].prenom === prenom) {
+        vm.newOrder.client = vm.clients[i];
+      }
+    }
+  };
+
   vm.validate = function() {
 
     vm.newOrder.paye = "false";
@@ -115,6 +168,17 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     $state.transitionTo('order.form');
 
 
+  };
+
+
+  vm.calcPrice = function() {
+    vm.newOrder.total +=(angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
+                        (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix) +
+                        (angular.isUndefined(vm.currentMeal.dessert.prix) ? 0 : vm.currentMeal.dessert.prix);
+
+                      vm.currentMeal.pizza   = null;
+                      vm.currentMeal.drink   = null;
+                      vm.currentMeal.dessert =null;
   };
 
   vm.save = function() {
@@ -133,14 +197,10 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.newOrder.produits.push(vm.currentMeal.pizza);
     vm.newOrder.produits.push(vm.currentMeal.drink);
     vm.newOrder.produits.push(vm.currentMeal.dessert);
-    vm.newOrder.total += (angular.isUndefined(vm.currentMeal.pizza.prix) ? 0 : vm.currentMeal.pizza.prix) +
-                        (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix) +
-                        (angular.isUndefined(vm.currentMeal.dessert.prix) ? 0 : vm.currentMeal.dessert.prix);
-    vm.currentMeal.pizza = null;
-    vm.currentMeal.drink = null;
-    vm.currentMeal.dessert=null;
+    vm.calcPrice();
   };
 
+  // Fonctions des boutons de tri
   vm.listAll = function() {
     vm.items = vm.pizzas.concat(vm.drinks.concat(vm.desserts));
   };
