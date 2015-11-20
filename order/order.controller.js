@@ -3,7 +3,8 @@ angular.module('pzWebAdminApp.order', [
   'PizzaService',
   'DrinkService',
   'CommandService',
-  'DessertService'
+  'DessertService',
+  'pzWebAdminApp.shared'
 ]);
 angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouterProvider) {
 
@@ -17,9 +18,6 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
         controller: 'OrderController',
         controllerAs: 'ctrl'
       }
-      // 'newOrderForm': {
-      //   templateUrl: 'order/views/menu.order.html'
-      // }
     }
   })
   .state('order.menu', {
@@ -46,11 +44,6 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
     templateUrl: 'order/viewsReady/liste.order.html',
     controller: 'ReadyController',
     controllerAs: 'ctrl'
-    // views: {
-    //   "": {
-    //
-    //   }
-    // }
   })
 
 .state("orderdelivered", {
@@ -64,7 +57,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
 
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService, DessertService) {
+angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService, DessertService, userService) {
   var vm = this;
   $state.transitionTo('order.menu');
 
@@ -148,12 +141,21 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   };
 
   vm.updateClient = function(nom, prenom) {
-    for (var i in vm.clients) {
-      if (vm.clients[i].nom === nom &&
-          vm.clients[i].prenom === prenom) {
-        vm.newOrder.client = vm.clients[i];
-      }
-    }
+    // for (var i in vm.clients) {
+    //   if (vm.clients[i].nom === nom &&
+    //       vm.clients[i].prenom === prenom) {
+    //     vm.newOrder.client = vm.clients[i];
+    //   }
+    // }
+    var client = {
+      "nom": nom,
+      "prenom": prenom
+    };
+    userService.findOneByNomAndPrenom(client)
+    .then(function Success(res) {
+      vm.newOrder.client = res;
+    });
+
   };
 
   vm.validate = function() {
@@ -165,7 +167,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.currentMeal.drink = null;
     vm.currentMeal.dessert=null;
     vm.newOrder.total = 0;
-    $state.transitionTo('order.form');
+
 
 
   };

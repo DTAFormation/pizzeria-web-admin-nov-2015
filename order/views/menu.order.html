@@ -56,7 +56,8 @@
         <span class="label label-default">Nom</span>
         <input class="form-control" type="text" ng-model="ctrl.newOrder.client.nom">
         <span class="label label-default">Prenom Client</span>
-        <input class="form-control" ng-change="ctrl.updateClient(ctrl.newOrder.client.nom, ctrl.newOrder.client.prenom)" type="text" ng-model="ctrl.newOrder.client.prenom">
+        <input class="form-control" type="text" ng-model="ctrl.newOrder.client.prenom" ng-model-options="{ debounce: 1000 }"
+        ng-change="ctrl.updateClient(ctrl.newOrder.client.nom, ctrl.newOrder.client.prenom)">
         <span class="label label-default">Adresse Client</span>
         <input class="form-control" type="text" ng-model="ctrl.newOrder.client.addr">
         <span class="label label-default">Tel. Client</span>
@@ -65,7 +66,6 @@
 
       <label for="" class="control-label">Paiement</label><br>
       <select name="multipleSelect" id="multipleSelect" ng-model="ctrl.newOrder.paiement">
-       <option value="EN_LIGNE">En ligne</option>
        <option value="CARTE">Carte</option>
        <option value="LIQUIDE">Liquide</option>
       </select><br>
