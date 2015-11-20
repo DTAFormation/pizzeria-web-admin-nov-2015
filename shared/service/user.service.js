@@ -20,10 +20,6 @@
         // TODO Gestion de la déconnexion
     };
 
-    this.findOneByNomAndPrenom = function(client) {
-      return $http.post('http://localhost:8080/client/search', client)
-      .then(handleResponse);
-    };
     this.findOne=function(id){
         return $http.get(url +"/"+ id)
             .then(handleResponse);

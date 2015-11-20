@@ -21,12 +21,15 @@
       <div ui-view="newOrderForm"></div>
 
     </div>
-    <div class="col-lg-8">
+    <div class="col-lg-4">
       <ul class="list-group">
 
         <li class="col-lg-2 list-group-item"  ng-repeat="item in ctrl.items" ng-click="ctrl.select(item)">
           {{item.nom}}
 
         </li>
+    </div>
+    <div class="col-lg-4">
+      <div ui-view="readyOrder"></div>
     </div>
   </div>

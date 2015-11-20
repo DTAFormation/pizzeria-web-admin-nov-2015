@@ -17,6 +17,11 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
         templateUrl: 'order/views/order.html',
         controller: 'OrderController',
         controllerAs: 'ctrl'
+      },
+      'readyOrder@order': {
+        templateUrl: 'order/viewsReady/liste.order.html',
+        controller: 'ReadyController',
+        controllerAs: 'ctrl'
       }
     }
   })
@@ -39,11 +44,18 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
       }
     }
   })
-  .state('orderReady', {
-    url: '/ready',
-    templateUrl: 'order/viewsReady/liste.order.html',
-    controller: 'ReadyController',
-    controllerAs: 'ctrl'
+  .state('order.ready', {
+    views: {
+      'readyOrder': {
+        templateUrl: 'order/viewsReady/liste.order.html',
+        controller: 'ReadyController',
+        controllerAs: 'ctrl'
+      }
+    }
+    // url: '/ready',
+    // templateUrl: 'order/viewsReady/liste.order.html',
+    // controller: 'ReadyController',
+    // controllerAs: 'ctrl'
   })
 
 .state("orderdelivered", {
@@ -57,7 +69,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
 
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService, DessertService, userService) {
+angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService, DessertService, ClientService) {
   var vm = this;
   $state.transitionTo('order.menu');
 
@@ -134,9 +146,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   vm.showClient = function(type) {
     console.log(type);
     if (type === 'LIVRAISON') {
-      console.log($state.current.name);
       $state.transitionTo('order.clientForm');
-      console.log($state.current.name);
     }
   };
 
@@ -151,7 +161,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
       "nom": nom,
       "prenom": prenom
     };
-    userService.findOneByNomAndPrenom(client)
+    ClientService.findOneByNomAndPrenom(client)
     .then(function Success(res) {
       vm.newOrder.client = res;
     });

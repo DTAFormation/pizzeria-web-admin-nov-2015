@@ -13,26 +13,26 @@ angular.module('CommandService', []).service('CommandService', function($http, p
   };
 
   function handleResponse(response) {
-    return response.data
+    return response.data;
   }
 
   this.getCommandesPretesLivraison= function () {
     return $http.get(pzConfig.COMMAND_RESOURCE_URL+'/pretes/livraison')
-    .then(handleResponse)
-  }
+    .then(handleResponse);
+  };
 
   this.getCommandesPretesCaisse= function () {
-    return $http.get(pzConfig.COMMAND_RESOURCE_URL+'/pretes/caisse')
-    .then(handleResponse)
-  }
+    return $http.get(pzConfig.COMMAND_RESOURCE_URL+'sPretesCaisse')
+    .then(handleResponse);
+  };
 
   this.getCommandesPizzasEnCours = function () {
     return $http.get(pzConfig.COMMAND_RESOURCE_URL+'/enCours')
     .then(handleResponse);
-  }
+  };
 
   this.updateCommande= function (commande) {
     return $http.put(pzConfig.COMMAND_RESOURCE_URL, commande)
-    .then(handleResponse)
-  }
+    .then(handleResponse);
+  };
 });
