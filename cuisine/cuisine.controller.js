@@ -25,7 +25,7 @@ angular.module('pzWebAdminApp.cuisine').controller('CuisineController', function
 
   vm.updatePage = function(){
     CommandService.getCommandesPizzasEnCours()
-    .then(function(commandes){
+    .then(function(commandes, pizzas){
       vm.commandesPizza = commandes;
     }.bind(this))
   }
