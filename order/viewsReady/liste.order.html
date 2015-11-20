@@ -6,7 +6,7 @@
 			<th class="tableListDimLarge" >Client</th>
 			<th class="tableListDimLarge" >Type</th>
 			<th class="tableListDimLarge" >Paiement</th>
-			<th class="tableListDimMedium" >Reglee?</th>
+			<th class="tableListDimMedium" >Encaissement</th>
 			<th class="tableListDimLarge" >Etat</th>
 			<th class="tableListDimLarge" >Validation</th>
 		</tr>
@@ -20,9 +20,15 @@
 				<td class="tableListDimLarge cursor" >{{tab.client.login}} - ({{tab.client.prenom}} {{tab.client.nom}})</td>
 				<td class="tableListDimLarge cursor" >{{tab.type}}</td>
 				<td class="tableListDimLarge cursor" >{{tab.paiement}}</td>
-				<td class="tableListDimMedium cursor" >{{tab.paye}}</td>
+				<td class="tableListDimMedium cursor" >
+					<p ng-show="tab.paye">Commande Réglée</p>
+					<button ng-show="!tab.paye" type="button" ng-click="ctrl.encaissement(tab)" class="btn btn-success">Encaissement</button>
+				</td>
 				<td class="tableListDimLarge cursor" >{{tab.etat}}</td>
-				<td><button type="button" ng-click="ctrl.validerDistribution(tab)" class="btn btn-success">Commande distribuée</button></td>
+				<td>
+					<button ng-show="tab.paye" type="button" ng-click="ctrl.validerDistribution(tab)" class="btn btn-success">Commande distribuée</button>
+					<button ng-show="!tab.paye" type="button" ng-click="ctrl.validerDistribution(tab)" class="btn btn-success" disabled="disabled">Commande distribuée</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>

@@ -1,0 +1,32 @@
+<form name="ctrl.payForm" ng-submit="ctrl.validerPaiement()" role="form" accept-charset="utf-8">
+	<legend>Encaissement de la commande n°{{ctrl.command.id}}</legend>
+
+	<div class="form-group">
+		<label for="paiement" >Paiement: </label>
+		<select name="paiement" id="paiement" ng-model="ctrl.command.paiement" class="form-control" required>
+			<option value="CARTE">Carte</option>
+			<option value="LIQUIDE">Liquide</option>
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label for="total" >Total: </label>
+		<input type="number" class="form-control" min="0" step="0.5" value="ctrl.command.total" id="total" name="total" ng-model="ctrl.command.total" placeholder="Input field" required>
+	</div>
+
+	<div class="form-group">
+		<label for="recu" >Reçu: </label>
+		<input type="number" class="form-control" min="0" step="0.5" id="recu" name="recu" ng-model="ctrl.recu" placeholder="Input field" required>
+	</div>
+
+	<div ng-show="ctrl.command.paiement!='CARTE'" class="form-group">
+		<label for="rendu" >Rendu: </label>
+		<input type="number" class="form-control" min="0" step="0.5" id="rendu" name="rendu" ng-model="ctrl.rendu" placeholder="Input field" required>
+	</div>
+
+	<div ng-show="ctrl.command.paiement=='CARTE'" class="form-group">
+		<button type="button" ng-click="ctrl.paiementCarte()" class="btn btn-success" >Payer par Carte</button>
+	</div>
+
+	<button type="submit" class="btn btn-primary" ng-disabled="ctrl.payForm.$dirty && ctrl.payForm.$invalid">Valider le paiement</button>
+</form>

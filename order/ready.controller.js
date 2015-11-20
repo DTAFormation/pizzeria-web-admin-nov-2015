@@ -1,4 +1,4 @@
-angular.module('pzWebAdminApp.order').controller('ReadyController', function($state, PizzaService, DrinkService, CommandService){
+angular.module('pzWebAdminApp.order').controller('ReadyController', function($state, CommandService){
   var ctrl = this;
   ctrl.toggle = {};
   ctrl.pizzaPretes = {};
@@ -14,11 +14,15 @@ angular.module('pzWebAdminApp.order').controller('ReadyController', function($st
 
   ctrl.listUpdate();
 
-    ctrl.validerDistribution = function(commande){
-      commande.etat="TERMINE";
-      CommandService.updateCommande(commande)
-      	.then(function success(response){
-      		ctrl.listUpdate();
-      })
-    };
+  ctrl.validerDistribution = function(commande){
+    commande.etat="TERMINE";
+    CommandService.updateCommande(commande)
+    	.then(function success(response){
+    		ctrl.listUpdate();
+    })
+  };
+
+  ctrl.encaissement = function(commande){
+    $state.go('orderPay', {command:commande});
+  };
 });
