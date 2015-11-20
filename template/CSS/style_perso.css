@@ -57,3 +57,19 @@ body{
 input.ng-invalid.ng-dirty{
     box-shadow: 0 0 6px red;
 }
+
+.tableListDimSmall{
+    width:5%;
+}
+
+.tableListDimMedium{
+    width:15%;
+}
+
+.tableListDimLarge{
+    width:16%;
+}
+
+.cursor{
+    cursor:pointer;
+}
