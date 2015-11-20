@@ -78,7 +78,8 @@ angular.module('pzWebAdminApp.product').controller('productController', function
 
   ctrl.listupdate=function(){
     PizzaService.getPizzaList().then(function ihaveit(response){
-      ctrl.pizzas = response  
+      ctrl.pizzas = response ;
+      console.log(ctrl.pizzas);
     });
     
     DrinkService.getDrinkList().then(function ihaveit(response){
@@ -95,6 +96,8 @@ angular.module('pzWebAdminApp.product').controller('productController', function
   }
 
   ctrl.listupdate();
+
+
 
 //Initialisation de variable pour les formulaires
 ctrl.typeProducts=[ {
@@ -142,6 +145,7 @@ ctrl.listingredientForm=[]
         //Pour l'afichage du détail
         ctrl.select = function(item) {
           ctrl.produitSelectionner=item;
+          console.log(ctrl.produitSelectionner);
         };
 
         //Bouton modifier du détail du produit
@@ -152,6 +156,7 @@ ctrl.listingredientForm=[]
         //Bouton supprimer du détail du produit
         ctrl.supprimer=function(id){
          ProductService.deleteProduct(id).then(function ihaveit(response){
+          ctrl.produitSelectionner=[];
           ctrl.listupdate();
           $state.transitionTo('product.list');
         });
@@ -165,19 +170,21 @@ ctrl.listingredientForm=[]
       });       
     }
 
-    //Pour le formulaire d'ajout d'un produit et modification
+    //Pour le formulaire d'ajout d'un produit 
     ctrl.save = function() {
+       
       if(this.productForm.$invalid){
         alert("Erreur")
         return
       }
-          // ctrl.productForm.ingredients=ctrl.listingredientForm TODO
-
-          ProductService.saveProduct(ctrl.productForm).then(function ihaveit(response){
+          ctrl.productForm.ingredients=ctrl.ingredientsProducts.filter(function(ingredient){ return ingredient.selected});
+          console.log(ctrl.productForm);
+        
+         ProductService.saveProduct(ctrl.productForm).then(function ihaveit(response){
             ctrl.productForm=null;
             ctrl.listupdate();
             $state.transitionTo('product.list');
-          }); 
+          });
 
         };
 
@@ -187,7 +194,6 @@ ctrl.listingredientForm=[]
             return
           }
           
-
           ProductService.updateProduct(ctrl.produitSelectionner).then(function ihaveit(response){
             ctrl.produitSelectionner=null;
             ctrl.listupdate();

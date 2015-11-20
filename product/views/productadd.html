@@ -49,7 +49,7 @@
 		<input class="form-control" type="number" id="prix" name="prix" ng-model="ctrl.productForm.prix" required>
 	</div>
 
-	<div class="form-groupe form-inline" ng-repeat="ingredientproduct in ctrl.ingredientsProducts">
+	<div class="form-groupe form-inline" ng-repeat="ingredientproduct in ctrl.ingredientsProducts" ng-show="ctrl.productForm.type=='PIZZA'">
 		<input class="checkbox" type="checkbox" ng-model="ingredientproduct.selected"> {{ingredientproduct.nom}} 
 	</div>
 <!--Submit-->
