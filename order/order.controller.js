@@ -127,6 +127,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
   };
 
+
   vm.showClient = function(type) {
     console.log(type);
     if (type === 'LIVRAISON') {

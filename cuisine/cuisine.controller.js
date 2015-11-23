@@ -22,13 +22,21 @@ angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRout
 
 angular.module('pzWebAdminApp.cuisine').controller('CuisineController', function($state, CommandService) {
   var vm = this;
-  CommandService.getCommandesPizzasEnCours()
-  .then(function(commandes){
-    vm.commandesPizza = commandes;
-  }.bind(this))
+
+  vm.updatePage = function(){
+    CommandService.getCommandesPizzasEnCours()
+    .then(function(commandes, pizzas){
+      vm.commandesPizza = commandes;
+    }.bind(this))
+  }
+
+  vm.updatePage();
 
   this.validerPreparation = function(commande){
       commande.etat="PREPARE";
-      CommandService.updateCommande(commande);
+      CommandService.updateCommande(commande)
+        .then(function success(response){
+          vm.updatePage();
+        })
     }
   });
