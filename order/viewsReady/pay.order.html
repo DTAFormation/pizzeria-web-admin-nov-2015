@@ -16,7 +16,7 @@
 
 	<div class="form-group">
 		<label for="recu" >Reçu: </label>
-		<input type="number" class="form-control" min="0" step="0.01" id="recu" name="recu" ng-model="ctrl.recu" placeholder="Input field" required>
+		<input ng-change="ctrl.calculerRendu()" type="number" class="form-control" min="0" step="0.01" id="recu" name="recu" ng-model="ctrl.recu" placeholder="Input field" required>
 	</div>
 
 	<div ng-show="ctrl.command.paiement!='CARTE'" class="form-group">

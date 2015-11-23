@@ -4,8 +4,8 @@ angular.module('pzWebAdminApp.order').controller('PayController', function($stat
   ctrl.recu = 0;
   ctrl.rendu = 0;
 
-  this.validerPaiement = function(){
-    if(this.payForm.$invalid){
+  ctrl.validerPaiement = function(){
+    if(ctrl.payForm.$invalid){
         alert("error");
         return;
     }
@@ -22,7 +22,12 @@ angular.module('pzWebAdminApp.order').controller('PayController', function($stat
 
   };
 
-  this.paiementCarte = function(){
+  ctrl.paiementCarte = function(){
     ctrl.recu = ctrl.command.total;
   };
+
+  ctrl.calculerRendu = function(){
+    ctrl.rendu = ctrl.recu - ctrl.command.total;
+    ctrl.rendu = Math.round(ctrl.rendu*100)/100;
+  }
 });
