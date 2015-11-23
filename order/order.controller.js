@@ -157,8 +157,9 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.currentMeal.dessert={};
     vm.newOrder.total = 0;
     vm.newOrder = {};
-
-
+    vm.newOrder.produits = [];
+    vm.newOrder.total = 0;
+    vm.meals.splice(0, vm.meals.length);
   };
 
 
