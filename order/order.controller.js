@@ -154,7 +154,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   };
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandService,PizzaService, DrinkService, DessertService) {
+angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandService) {
   var self = this;
    self.toggle = {};
    self.pizzaLivrees = {};
@@ -162,30 +162,34 @@ angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', fun
 
   self.title = "BLABLA";
 
-self.select = function(commande){
-  if(commande.etat=="PREPARE"){
-    commande.etat ="LIVRAISON";
-  }else if(commande.etat=="LIVRAISON") {
-    commande.etat="TERMINE";
-  }
-  CommandService.updateCommande(commande)
-    .then(function success(){
-      self.updatePage();
-    })
-};
+  self.select = function(commande){
+    if(commande.etat=="PREPARE"){
+      commande.etat ="LIVRAISON";
+    }else if(commande.etat=="LIVRAISON") {
+      commande.etat="TERMINE";
+    }
+    CommandService.updateCommande(commande)
+      .then(function success(){
+        self.updatePage();
+      })
+  };
 
-self.updatePage = function(){
-  CommandService.getCommandesPretesLivraison()
-  .then(function(results){
+  self.updatePage = function(){
+    CommandService.getCommandesPretesLivraison()
+    .then(function(results){
 
-    self.pizzaLivrees = results;
+      self.pizzaLivrees = results;
 
 
-    for(var i = 0; i<self.pizzaLivrees.length; i++)
-     self.toggle[i] =  false;
-    }.bind(self));
-};
+      for(var i = 0; i<self.pizzaLivrees.length; i++)
+       self.toggle[i] =  false;
+      }.bind(self));
+  };
 
-self.updatePage();
+  self.updatePage();
+
+  self.encaissement = function(commande){
+    $state.go('orderPay', {command:commande});
+  };
 
 });

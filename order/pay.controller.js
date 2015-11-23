@@ -13,7 +13,8 @@ angular.module('pzWebAdminApp.order').controller('PayController', function($stat
     if(ctrl.command.total == ctrl.recu - ctrl.rendu){
       ctrl.command.paye=true;
       CommandService.updateCommande(ctrl.command);
-      $state.go('orderReady');
+      if(ctrl.command.type!="LIVRAISON") $state.go('orderReady');
+      else $state.go('orderdelivered');
     }else{
       alert("error");
       return;

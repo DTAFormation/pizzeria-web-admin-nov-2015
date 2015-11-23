@@ -61,10 +61,10 @@
 		<div class="col-md-1">N° commande</div>
 		<div class="col-md-1">N° client</div>
 		<div class="col-md-3">Adresse du client</div>
-		<div class="col-md-2">Type de la commande</div>
+		<div class="col-md-1">Type de la commande</div>
 		<div class="col-md-1">Total</div>
 		<div class="col-md-1">Paiement</div>
-		<div class="col-md-1">Réglé ?</div>
+		<div class="col-md-2">Encaissement</div>
 		<div class="col-md-1">Etat</div>
 		<div class="col-md-1">Validation</div>
 	</div>
@@ -80,17 +80,24 @@
 
 			<div class="col-md-3">{{commande.client.adresse}}</div>
 
-			<div class="col-md-2">{{commande.type}}</div>
+			<div class="col-md-1">{{commande.type}}</div>
 
 			<div class="col-md-1">{{commande.total}}</div>
 
 			<div class="col-md-1">{{commande.paiement}}</div>
 
-			<div class="col-md-1">{{commande.paye}}</div>
+			<div class="col-md-2">
+				<p ng-show="commande.paye">Commande Réglée</p>
+				<button ng-show="!commande.paye" type="button" ng-click="self.encaissement(commande)" class="btn btn-success">Encaissement</button>
+			</div>
 
 			<div class="col-md-1">{{commande.etat}}</div>
 
-			<div class="col-md-1"><input type="button" class="btn btn-success" ng-click="self.select(commande)" value="Valider"></input></div>
+			<div class="col-md-1">
+				<input ng-show="commande.etat=='PREPARE'" type="button" class="btn btn-success" ng-click="self.select(commande)" value="Livrer"></input>
+				<input ng-show="commande.etat=='LIVRAISON' && commande.paye" type="button" class="btn btn-success" ng-click="self.select(commande)" value="Valider"></input>
+				<input ng-show="commande.etat=='LIVRAISON' && !commande.paye" type="button" class="btn btn-success" ng-click="self.select(commande)" value="Commande Livrée" disabled="disabled"></input>
+			</div>
 
 		</div>
 

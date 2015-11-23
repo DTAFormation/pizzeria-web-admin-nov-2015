@@ -5,5 +5,6 @@ angular.module('pzWebAdminApp.shared').constant('pzConfig', {
 	'DESSERT_RESOURCE_URL':BACKEND_BASE_URL + '/dessert',
 	'INGREDIENT_RESOURCE_URL':BACKEND_BASE_URL + '/ingredient',
 	'PIZZA_RESOURCE_URL':BACKEND_BASE_URL + '/pizza',
-	'PRODUCT_RESOURCE_URL':BACKEND_BASE_URL + '/product'
+	'PRODUCT_RESOURCE_URL':BACKEND_BASE_URL + '/product',
+	'USER_RESOURCE_URL':BACKEND_BASE_URL + '/user'
 });
