@@ -1,0 +1,19 @@
+<div class="modal-body">
+          <div ng-if="ctrl.items.pizza.nom != ''">
+              <strong>Pizza:</strong>{{ctrl.items.pizza.nom}}<br>
+          </div>
+          <div ng-if="ctrl.items.drink.nom != ''">
+              <strong>Boisson:</strong>{{ctrl.items.drink.nom}}<br>
+          </div>
+
+          <div ng-if="ctrl.items.dessert.nom">
+              <strong>Dessert:</strong>{{ctrl.items.dessert.nom}}<br>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ctrl.ok()">OK</button>
+
+        </div>
+    </script>
+</div>

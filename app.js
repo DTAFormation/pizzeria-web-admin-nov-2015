@@ -2,6 +2,7 @@
     'ui.utils',
     'ngRoute',
     'ui.router',
+    'ui.bootstrap',
 
     'pzWebAdminApp.shared',
     'pzWebAdminApp.filters',

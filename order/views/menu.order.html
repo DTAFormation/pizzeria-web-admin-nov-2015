@@ -41,7 +41,7 @@
           <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="XL"/>XL -->
 
     <div class="row">
-      <article class="form-group col-lg-5">
+      <article class="form-group col-lg-4">
         <label for="" class="control-label">Commande</label>
         <select name="multipleSelect" id="multipleSelect" ng-change="ctrl.showClient(ctrl.newOrder.type)" ng-model="ctrl.newOrder.type">
          <option value="LIVRAISON">Livraison</option>
@@ -71,15 +71,28 @@
       </select><br>
     </div>
 
+    <div class="row">
+        <article class="col-lg-4">
+          <span class="label label-default">Total</span>
+        <input class="form-control" type="text" ng-model="ctrl.newOrder.total" disabled></input>
+        </article>
 
-    <button type="button" class="btn btn-success" ng-click="ctrl.validate()">Valider</button>
-    <span class="label label-default">Total</span>
-    <input class="form-control" type="text" ng-model="ctrl.newOrder.total" disabled></input>
+        <article class="col-lg-4">
+            <button type="button" class="btn btn-success btn-lg" ng-click="ctrl.validate()">Valider commande</button>
+        </article>
+    </div>
+
+
+
+
   </form>
+  <h3>Contenu de la commande</h3>
   <div class="row">
+
         <ul class="list-group">
 
-          <li class="col-lg-2 list-group-item" ng-repeat="item in ctrl.newOrder.produits track by $index">
-            {{item.nom}}
+          <li class="col-lg-2" style="list-style:none;margin-top:3px;" ng-repeat="item in ctrl.meals track by $index">
+          <button class="btn btn-default" type="button" name="name" ng-click="ctrl.open(item)">{{$index+1}}</button>
+        </li>
   </div>
 </div>

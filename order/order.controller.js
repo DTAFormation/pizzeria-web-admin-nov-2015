@@ -1,5 +1,8 @@
 angular.module('pzWebAdminApp.order', [
   'ui.router',
+  'ui.bootstrap',
+  'ngAnimate',
+
   'PizzaService',
   'DrinkService',
   'CommandService',
@@ -69,7 +72,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
 
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderController', function($state, PizzaService, DrinkService, CommandService, DessertService, ClientService) {
+angular.module('pzWebAdminApp.order').controller('OrderController', function($state, $uibModal, PizzaService, DrinkService, CommandService, DessertService, ClientService) {
   var vm = this;
   $state.transitionTo('order.menu');
 
@@ -82,6 +85,8 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   vm.newOrder = {};
     vm.newOrder.total = 0;
   vm.newOrder.produits = [];
+  vm.meals = [];
+    vm.animationsEnabled = true;
 
   PizzaService.getPizzaList().then(function Success(results) {
       vm.pizzas = results;
@@ -94,6 +99,20 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
       });
   });
 
+  vm.open = function (item) {
+
+    var modalInstance = $uibModal.open({
+      animation:vm.animationsEnabled,
+      templateUrl: 'order/views/commandContent.order.html',
+      controller: 'CommandeInstanceController',
+      controllerAs: 'ctrl',
+      resolve: {
+        items: function () {
+          return item;
+        }
+      }
+    });
+  };
 
   vm.select = function(item) {
     if ("PIZZA" === item.type) {
@@ -108,41 +127,6 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
 
   };
 
-  vm.clients = [
-      {
-        "nom":"Winchester",
-        "prenom": "Dean",
-        "addr":"Lawrence",
-        "tel": "064164646",
-        "login": "DeanW",
-        "mdp":"mdp"
-      },
-      {
-        "nom":"Winchester",
-        "prenom": "Sam",
-        "addr":"Lawrence",
-        "tel": "064164646",
-        "login": "SamW",
-        "mdp":"mdp"
-      },
-      {
-        "nom":"Winchester",
-        "prenom": "John",
-        "addr":"Lawrence",
-        "tel": "064164646",
-        "login": "JohnW",
-        "mdp":"mdp"
-      },
-      {
-        "nom":"Dunno",
-        "prenom": "Bobby",
-        "addr":"Lawrence",
-        "tel": "064164646",
-        "login": "BobbyD",
-        "mdp":"mdp"
-      }
-    ];
-
   vm.showClient = function(type) {
     console.log(type);
     if (type === 'LIVRAISON') {
@@ -151,12 +135,6 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   };
 
   vm.updateClient = function(nom, prenom) {
-    // for (var i in vm.clients) {
-    //   if (vm.clients[i].nom === nom &&
-    //       vm.clients[i].prenom === prenom) {
-    //     vm.newOrder.client = vm.clients[i];
-    //   }
-    // }
     var client = {
       "nom": nom,
       "prenom": prenom
@@ -173,11 +151,11 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.newOrder.paye = "false";
     vm.newOrder.etat = "EN_COURS";
     CommandService.saveCommand(vm.newOrder);
-    vm.currentMeal.pizza = null;
-    vm.currentMeal.drink = null;
-    vm.currentMeal.dessert=null;
+    vm.currentMeal.pizza = {};
+    vm.currentMeal.drink = {};
+    vm.currentMeal.dessert={};
     vm.newOrder.total = 0;
-
+    vm.newOrder = {};
 
 
   };
@@ -188,9 +166,9 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
                         (angular.isUndefined(vm.currentMeal.drink.prix) ? 0 : vm.currentMeal.drink.prix) +
                         (angular.isUndefined(vm.currentMeal.dessert.prix) ? 0 : vm.currentMeal.dessert.prix);
 
-                      vm.currentMeal.pizza   = null;
-                      vm.currentMeal.drink   = null;
-                      vm.currentMeal.dessert =null;
+                      vm.currentMeal.pizza   = {};
+                      vm.currentMeal.drink   = {};
+                      vm.currentMeal.dessert ={};
   };
 
   vm.save = function() {
@@ -209,6 +187,12 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.newOrder.produits.push(vm.currentMeal.pizza);
     vm.newOrder.produits.push(vm.currentMeal.drink);
     vm.newOrder.produits.push(vm.currentMeal.dessert);
+    var meal = {
+      pizza: vm.currentMeal.pizza,
+      drink: vm.currentMeal.drink,
+      dessert: vm.currentMeal.dessert
+    };
+    vm.meals.push(meal);
     vm.calcPrice();
   };
 
