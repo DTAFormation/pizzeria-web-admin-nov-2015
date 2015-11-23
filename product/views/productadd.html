@@ -10,34 +10,36 @@
 		
 		<div class="row col-lg-12 form-group">
 
-			<form ng-model="ctrl.productForm" ng-submit="ctrl.save()" novalidate>
+			<form ng-model="ctrl.productForm" ng-submit="ctrl.save()" >
 				<div ng-show="ctrl.productForm.$invalid && ctrl.productForm.$dirty">
 					<h1>Les champs avec * sont obligatoires</h1>
 				</div>
 
 				<div class="form-group">
 					<label for="nom">Nom*:</label>
-					<input class="form-control" type="text" id="nom" name="nom" ng-model="ctrl.productForm.nom" required>
+					<input class="form-control" type="text" id="nom" name="nom" ng-model="ctrl.productForm.nom" required value="">
 				</div>
 
 				<div class="form-group">
-					<label for="type">Type:</label>
-					<select  class="form-control" id="type" name="type" ng-model="ctrl.productForm.type">
+					<label for="type">Type*:</label>
+					<select  class="form-control" id="type" name="type" ng-model="ctrl.productForm.type"  required>
+      					<option></option>
       					<option ng-repeat="typeproduct in ctrl.typeProducts" value="{{typeproduct.nom}}">{{typeproduct.nom}}</option>
     				</select>
-				</select>
 			</div>
 
 			<div class="form-group" ng-show="ctrl.productForm.type=='PIZZA'">
-				<label for="taille">Taille (Pizza):</label>
-					<select  class="form-control" id="taille" name="taille" ng-model="ctrl.productForm.taille">
+				<label for="taille">Taille*:</label>
+					<select  class="form-control" id="taille" name="taille" ng-model="ctrl.productForm.taille" ng-required="ctrl.productForm.type=='PIZZA'" >
+						<option></option>
       					<option ng-repeat="tailleproduct in ctrl.tailleProducts" value="{{tailleproduct.nom}}">{{tailleproduct.nom}}</option>
     				</select>
 		</div>
 
 		<div class="form-group" ng-show="ctrl.productForm.type=='BOISSON'">
-			<label for="format">Format (Boisson):</label>
-					<select  class="form-control" id="format" name="format" ng-model="ctrl.productForm.format">
+			<label for="format">Format*:</label>
+					<select  class="form-control" id="format" name="format" ng-model="ctrl.productForm.format" ng-required="ctrl.productForm.type=='BOISSON'" >
+						<option></option>
       					<option ng-repeat="formatproduct in ctrl.formatProducts" value="{{formatproduct.nom}}">{{formatproduct.nom}}</option>
     				</select>
 	</div>
@@ -46,15 +48,19 @@
 
 	<div class="form-group">
 		<label for="prix">Prix*:</label>
-		<input class="form-control" type="number" id="prix" name="prix" ng-model="ctrl.productForm.prix" required>
+		<input class="form-control" type="number" step="0.01" id="prix" name="prix" ng-model="ctrl.productForm.prix"  min=0 required>
 	</div>
 
-	<div class="form-groupe form-inline" ng-repeat="ingredientproduct in ctrl.ingredientsProducts">
-		<input class="checkbox" type="checkbox" ng-model="ingredientproduct.selected"> {{ingredientproduct.nom}} 
+	<div class="form-groupe form-inline" ng-show="ctrl.productForm.type=='PIZZA'">
+		<label>Ingredients:</label>
+		<div ng-repeat="ingredientproduct in ctrl.ingredientsProducts">
+			<input class="checkbox" type="checkbox" ng-model="ingredientproduct.selected"> {{ingredientproduct.nom}} 
+		</div>
+		<br>
 	</div>
 <!--Submit-->
 <div class="form-group">
-	<button class="form-control btn btn-success" type="submit" value= "Sauvegarder">SAVE</button>
+	<button class="form-control btn btn-success" type="submit" value= "Sauvegarder" ng-disabled="productForm.$invalid">SAVE</button>
 </div>
 
 </form>
