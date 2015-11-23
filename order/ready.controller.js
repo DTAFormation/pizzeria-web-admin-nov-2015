@@ -4,11 +4,12 @@ angular.module('pzWebAdminApp.order').controller('ReadyController', function($st
   ctrl.pizzaPretes = {};
 
   ctrl.listUpdate = function (){
-  	CommandService.getCommandesPretesCaisse()
+    CommandService.getCommandesPretesCaisse()
     .then(function (commandes) {
         ctrl.pizzaPretes = commandes;
-        for (var i = 0; i < ctrl.pizzaPretes.length; i++)
-          ctrl.toggle[i] = false;
+        for (var i = 0; i < ctrl.pizzaPretes.length; i++) {
+            ctrl.toggle[i] = false;
+          }
     }.bind(ctrl));
   };
 
@@ -17,9 +18,9 @@ angular.module('pzWebAdminApp.order').controller('ReadyController', function($st
   ctrl.validerDistribution = function(commande){
     commande.etat="TERMINE";
     CommandService.updateCommande(commande)
-    	.then(function success(response){
-    		ctrl.listUpdate();
-    })
+      .then(function success(response){
+        ctrl.listUpdate();
+    });
   };
 
   ctrl.encaissement = function(commande){

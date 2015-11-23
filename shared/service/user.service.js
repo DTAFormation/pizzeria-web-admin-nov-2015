@@ -20,7 +20,6 @@
         // TODO Gestion de la déconnexion
     };
 
-
     this.findOne=function(id){
         return $http.get(url +"/"+ id)
             .then(handleResponse);
