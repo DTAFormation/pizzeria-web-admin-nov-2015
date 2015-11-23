@@ -59,7 +59,7 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
             url: '/orderdelivered',
              templateUrl: 'order/views/list-order-delivered.html',
         controller: 'OrderDeliveredController',
-        controllerAs: 'ctrl'
+        controllerAs: 'self'
         });
 
 
@@ -154,8 +154,10 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
   };
 });
 
-angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandService) {
+angular.module('pzWebAdminApp.order').controller('OrderDeliveredController', function($state, CommandService,PizzaService, DrinkService, DessertService) {
   var self = this;
+   self.toggle = {};
+   self.pizzaLivrees = {};
    $state.transitionTo('orderdelivered');
 
   self.title = "BLABLA";
@@ -173,11 +175,15 @@ self.select = function(commande){
 };
 
 self.updatePage = function(){
-  CommandService.getCommandesPretesLivraison().then(function(results){
+  CommandService.getCommandesPretesLivraison()
+  .then(function(results){
 
-    self.commandesalivrer = results;
+    self.pizzaLivrees = results;
 
-  }.bind(this));
+
+    for(var i = 0; i<self.pizzaLivrees.length; i++)
+     self.toggle[i] =  false;
+    }.bind(self));
 };
 
 self.updatePage();

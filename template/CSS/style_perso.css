@@ -73,3 +73,22 @@ input.ng-invalid.ng-dirty{
 .cursor{
     cursor:pointer;
 }
+
+.topspace{
+    margin-top: 5px;
+
+ 
+}
+.borderbottom{
+    border-bottom: 2px solid black;
+
+}
+.liste{
+    margin-bottom: 5px;
+
+}
+
+.italic{
+        font-style: italic;
+    font-family: "Verdana";
+}
