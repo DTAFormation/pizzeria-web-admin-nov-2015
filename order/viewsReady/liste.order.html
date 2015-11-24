@@ -2,44 +2,28 @@
 <table class="table table-bordered table-hover">
 	<thead>
 		<tr>
-			<th class="tableListDimSmall" >Id</th>
-			<th class="tableListDimLarge" >Client</th>
-			<th class="tableListDimLarge" >Type</th>
-			<th class="tableListDimLarge" >Paiement</th>
-			<th class="tableListDimMedium" >Encaissement</th>
-			<th class="tableListDimLarge" >Etat</th>
-			<th class="tableListDimLarge" >Validation</th>
+			<th>Id</th>
+			<th>Commande</th>
+			<th>Client</th>
+			<th>Type</th>
+			<th>Paiement</th>
+			<th>Reglee?</th>
+			<th>Etat</th>
+			<th>Validation</th>
 		</tr>
 	</thead>
+	<tbody>
+		<tr ng-repeat="tab in ctrl.pizzaPretes">
+			<td>{{tab.id}}</td>
+			<td>Les Produits:<br><span ng-repeat="tabProduits in tab.produits">{{tabProduits.nom}} - {{tabProduits.prix}}€<br></span><br>
+				Les Menus: <br><span ng-repeat="tabMenus in tab.menus">{{tabMenus.nom}} - {{tabMenus.prix}}€<br></span><br>
+				Total: {{tab.total}}€</td>
+			<td>{{tab.client.login}} - ({{tab.client.prenom}} {{tab.client.nom}})</td>
+			<td>{{tab.type}}</td>
+			<td>{{tab.paiement}}</td>
+			<td>{{tab.paye}}</td>
+			<td>{{tab.etat}}</td>
+			<td><button type="button" ng-click="ctrl.validerDistribution(tab)" class="btn btn-success">Commande distribuée</button></td>
+		</tr>
+	</tbody>
 </table>
-<div ng-repeat="tab in ctrl.pizzaPretes track by $index | orderBy:id" >
-	<table class="table table-bordered table-hover">
-		<tbody>
-			<tr ng-click="ctrl.toggle[$index]=!ctrl.toggle[$index]">
-				<td class="tableListDimSmall cursor" >{{tab.id}}</td>
-				<td class="tableListDimLarge cursor" >{{tab.client.login}} - ({{tab.client.prenom}} {{tab.client.nom}})</td>
-				<td class="tableListDimLarge cursor" >{{tab.type}}</td>
-				<td class="tableListDimLarge cursor" >{{tab.paiement}}</td>
-				<td class="tableListDimMedium cursor" >
-					<p ng-show="tab.paye">Commande Réglée</p>
-					<button ng-show="!tab.paye" type="button" ng-click="ctrl.encaissement(tab)" class="btn btn-success">Encaissement</button>
-				</td>
-				<td class="tableListDimLarge cursor" >{{tab.etat}}</td>
-				<td>
-					<button ng-show="tab.paye" type="button" ng-click="ctrl.validerDistribution(tab)" class="btn btn-success">Commande distribuée</button>
-					<button ng-show="!tab.paye" type="button" ng-click="ctrl.validerDistribution(tab)" class="btn btn-success" disabled="disabled">Commande distribuée</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<table class="table table-bordered table-hover">
-		<tbody>
-			<tr ng-show="ctrl.toggle[$index]">
-				<td>Les Produits:<br><span ng-repeat="tabProduits in tab.produits">{{tabProduits.nom}} - {{tabProduits.prix}}€<br></span><br>
-					Les Menus: <br><span ng-repeat="tabMenus in tab.menus">{{tabMenus.nom}} - {{tabMenus.prix}}€<br></span><br>
-					Total: {{tab.total}}€
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>

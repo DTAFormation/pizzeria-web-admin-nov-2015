@@ -1,7 +1,7 @@
-﻿angular.module('pzWebAdminApp.shared').service('userService', function($http, $q, pzConfig) {
+﻿angular.module('pzWebAdminApp.shared').service('userService', function($http, $q) {
 
     var connected = false;
-    var url=pzConfig.USER_RESOURCE_URL;
+    var url="http://localhost:8080/user";
 
     function handleResponse(response) {
         // console.log("Success !")

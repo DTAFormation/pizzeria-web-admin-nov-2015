@@ -6,7 +6,6 @@
 		<table class="table table-default container">
 			<thead>
 				<tr>
-					<th>Identifiant</th>
 					<th>Nom</th>
 					<th>Prénom</th>
 					<th>Identifiant</th>
@@ -15,8 +14,7 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="user in ctrl.users">
-					<td><a href="#/utilisateurs/modifier/{{user.id}}">{{user.login}}</a></td>
-					<td>{{user.nom}}</td>
+					<td><a href="#/utilisateurs/modifier/{{user.id}}">{{user.nom}}</a></td>
 					<td>{{user.prenom}}</td>
 					<td>{{user.login}}</td>
 					<td>{{user.type}}</td>
