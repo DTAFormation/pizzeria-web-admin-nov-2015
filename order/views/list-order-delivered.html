@@ -70,7 +70,7 @@
   </div>
 
 
-  <div class="row topspace borderbottom" ng-repeat="commande in self.pizzaLivrees track by $index" ng-click="self.toggle[$index]=!self.toggle[$index]">
+  <div class="row topspace borderbottom" ng-repeat="commande in ctrl.commandesalivrer track by $index" ng-click="ctrl.toggle[$index]=!ctrl.toggle[$index]">
 
 
     <div class="row liste">
@@ -88,21 +88,21 @@
 
       <div class="col-md-2">
         <p ng-show="commande.paye">Commande Réglée</p>
-        <button ng-show="!commande.paye" type="button" ng-click="self.encaissement(commande)" class="btn btn-success">Encaissement</button>
+        <button ng-show="!commande.paye" type="button" ng-click="ctrl.encaissement(commande)" class="btn btn-success">Encaissement</button>
       </div>
 
       <div class="col-md-1">{{commande.etat}}</div>
 
       <div class="col-md-1">
-        <input ng-show="commande.etat=='PREPARE'" type="button" class="btn btn-success" ng-click="self.select(commande)" value="Livrer"></input>
-        <input ng-show="commande.etat=='LIVRAISON' && commande.paye" type="button" class="btn btn-success" ng-click="self.select(commande)" value="Valider"></input>
-        <input ng-show="commande.etat=='LIVRAISON' && !commande.paye" type="button" class="btn btn-success" ng-click="self.select(commande)" value="Commande Livrée" disabled="disabled"></input>
+        <input ng-show="commande.etat=='PREPARE'" type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Livrer"></input>
+        <input ng-show="commande.etat=='LIVRAISON' && commande.paye" type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Valider"></input>
+        <input ng-show="commande.etat=='LIVRAISON' && !commande.paye" type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Commande Livrée" disabled="disabled"></input>
       </div>
 
     </div>
 
 
-    <div class="row topspace" ng-show="self.toggle[$index]">
+    <div class="row topspace" ng-show="ctrl.toggle[$index]">
 
     <div ng-hide="commande.produits.length=='0'">
          <strong>Les produits : </strong><br>

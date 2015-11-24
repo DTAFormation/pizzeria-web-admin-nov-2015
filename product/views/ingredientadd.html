@@ -1,27 +1,27 @@
-<div class="col-lg-12"><h1>Ajouter un produit</h1><br></br></div>	
+<div class="col-lg-12"><h1>Ajouter un ingrédient</h1><br></br></div>
 
 <div class="row">
 
-	<div class="col-lg-3"></div>
+  <div class="col-lg-3"></div>
 
-	<!-- Formulaire d'ajout d'un produit-->
-	<div class="col-lg-6 panel panel-default">
-		<!-- Détail du produit sélectionner -->
-		<div class="row col-lg-12 form-group">
+  <!-- Formulaire d'ajout d'un produit-->
+  <div class="col-lg-6 panel panel-default">
+    <!-- Détail du produit sélectionner -->
+    <div class="row col-lg-12 form-group">
 
-			<form ng-model="ctrl.ingredientForm" ng-submit="ctrl.saveIngredient()">
-				<div ng-show="ctrl.ingredientForm.$invalid && ctrl.ingredientForm.$dirty">
-					<h1>Les champs avec * sont obligatoires</h1>
-				</div>
+      <form ng-model="ctrl.ingredientForm" ng-submit="ctrl.saveIngredient()">
+        <div ng-show="ctrl.ingredientForm.$invalid && ctrl.ingredientForm.$dirty">
+          <h1>Les champs avec * sont obligatoires</h1>
+        </div>
 
-				<div class="form-group">
-					<label for="nom">Nom produit*:</label>
-					<input class="form-control" type="text" id="nom" name="nom" placeholder="Nom du nouveau produit" ng-model="ctrl.ingredientForm.nom" required>
-				</div>
+        <div class="form-group">
+          <label for="nom">Nom ingrédient*:</label>
+          <input class="form-control" type="text" id="nom" name="nom" placeholder="Nom du nouveau produit" ng-model="ctrl.ingredientForm.nom" required>
+        </div>
 
 <!--Submit-->
 <div class="form-group">
-	<button class="form-control btn btn-success" type="submit" value= "Sauvegarder">SAVE</button>
+  <button class="form-control btn btn-success" type="submit" value= "Sauvegarder">SAVE</button>
 </div>
 
 </form>

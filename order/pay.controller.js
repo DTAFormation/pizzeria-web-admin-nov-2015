@@ -15,8 +15,8 @@ angular.module('pzWebAdminApp.order').controller('PayController', function($stat
       CommandService.updateCommande(ctrl.command);
       if(ctrl.command.type!="LIVRAISON") $state.go('orderReady');
       else $state.go('orderdelivered');
-    }else{
-      alert("error");
+    // }else{
+    //   alert("error");
       return;
     }
 

@@ -22,7 +22,7 @@ angular.module('CommandService', []).service('CommandService', function($http, p
   };
 
   this.getCommandesPretesCaisse= function () {
-    return $http.get(pzConfig.COMMAND_RESOURCE_URL+'sPretesCaisse')
+    return $http.get(pzConfig.COMMAND_RESOURCE_URL+'/pretes/caisse')
     .then(handleResponse);
   };
 

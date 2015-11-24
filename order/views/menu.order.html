@@ -41,7 +41,7 @@
           <input type="radio" ng-model="ctrl.currentMeal.drink.format" value="XL"/>XL -->
 
     <div class="row">
-      <article class="form-group col-lg-4">
+      <article class="form-group col-lg-6">
         <label for="" class="control-label">Commande</label>
         <select name="multipleSelect" id="multipleSelect" ng-change="ctrl.showClient(ctrl.newOrder.type)" ng-model="ctrl.newOrder.type">
          <option value="LIVRAISON">Livraison</option>
@@ -59,7 +59,7 @@
         <input class="form-control" type="text" ng-model="ctrl.newOrder.client.prenom" ng-model-options="{ debounce: 1000 }"
         ng-change="ctrl.updateClient(ctrl.newOrder.client.nom, ctrl.newOrder.client.prenom)">
         <span class="label label-default">Adresse Client</span>
-        <input class="form-control" type="text" ng-model="ctrl.newOrder.client.addr">
+        <input class="form-control" type="text" ng-model="ctrl.newOrder.client.adresse">
         <span class="label label-default">Tel. Client</span>
         <input class="form-control" type="text" ng-model="ctrl.newOrder.client.tel">
       </article>

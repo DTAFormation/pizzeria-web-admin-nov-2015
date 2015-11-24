@@ -164,7 +164,7 @@ angular.module('pzWebAdminApp.order').controller('OrderController', function($st
     vm.currentMeal.pizza = {};
     vm.currentMeal.drink = {};
     vm.currentMeal.dessert={};
-    vm.newOrder.total = 0;
+
     vm.newOrder = {};
     vm.newOrder.produits = [];
     vm.newOrder.total = 0;
@@ -238,10 +238,13 @@ self.select = function(commande){
   CommandService.updateCommande(commande);
 };
 
+self.encaissement = function(commande){
+  $state.go('orderPay', {command:commande});
+};
 CommandService.getCommandesPretesLivraison().then(function(results){
 
 self.commandesalivrer = results;
-
-}.bind(this));
+  console.log(self.commandesalivrer);
+});
 
 });

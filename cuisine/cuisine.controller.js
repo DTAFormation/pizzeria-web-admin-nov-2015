@@ -14,7 +14,7 @@ angular.module('pzWebAdminApp.cuisine').config(function($stateProvider, $urlRout
         controllerAs: 'ctrl'
       }
     }
-  })
+  });
 
   });
 
