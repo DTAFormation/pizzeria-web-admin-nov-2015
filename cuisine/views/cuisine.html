@@ -5,7 +5,7 @@
 			<thead>
 			<tr>
 				<th>Id</th>
-				<th>Commande</th>
+				<th>Pizzas</th>
 				<th>Client</th>
 				<th>Type</th>
 				<th>Etat</th>
@@ -14,15 +14,20 @@
 			</thead>
 			<tbody>
 			<p>
-			<tr ng-repeat="tab in ctrl.commandesPizza">
+			<tr ng-repeat="tab in ctrl.commandesPizza track by $index">
 					<td>{{tab.id}}</td>
-					<td>Les Produits:<br><span ng-repeat="tabProduit in tab.produits | filter:{type:'PIZZA'}">{{tabProduit.nom}}<br></span>
-						<br>Les Menus: <br><span ng-repeat="tabMenus in tab.menus | filter:{produit.type:'PIZZA'}">{{tabMenus.nom}}<br></span><br>
+					<td>
+						<span ng-repeat="pizza in ctrl.pizzas[$index]">{{pizza.nom}} &nbsp; {{pizza.taille}}
+							<input type="checkbox" ng-change="ctrl.verifCommande($parent.$index);" value="pretes" ng-model="ctrl.pizzasChecked[$parent.$index][$index]"></br> 
+						</span>
 					</td>
 					<td>{{tab.client.login}} - {{tab.client.prenom}} {{tab.client.nom}}</td>
 					<td>{{tab.type}}</td>
 					<td>{{tab.etat}}</td>
-					<td><button type="button" ng-click="ctrl.validerPreparation(tab)" class="btn btn-success" title="Changer l'état de la Pizza à &quot;Préparée&quot;">Préparée</button></td>
+					<td>
+						<button type="button" name="valideCommande" ng-click="ctrl.validerPreparation(tab)" class="btn btn-success" ng-show="!ctrl.commandesChecked[$index]" title="Changer l'état de la Pizza à &quot;Préparée&quot;" disabled="disabled">Préparée</button>
+						<button type="button" name="valideCommande" ng-click="ctrl.validerPreparation(tab)" class="btn btn-success" ng-show="ctrl.commandesChecked[$index]" title="Changer l'état de la Pizza à &quot;Préparée&quot;">Préparée</button>
+					</td>
 			</tr>
 			</p>
 			</tbody>
