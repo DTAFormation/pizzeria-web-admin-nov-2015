@@ -29,11 +29,19 @@ angular.module('pzWebAdminApp.home').config(function($stateProvider) {
 
 // Contrôleur principal du module 'home'
 // Usage de la syntaxe 'controller as', pas besoin du '$scope'
-angular.module('pzWebAdminApp.home').controller('homeCtrl', function(userService) {
+angular.module('pzWebAdminApp.home').controller('homeCtrl', function($state,userService) {
 
-    var self = this;
+    var ctrl = this;
 
-    self.title = "Page Home";
+    ctrl.connected=userService.isConnected();
+    if(!ctrl.connected)$state.transitionTo("login");
+
+    ctrl.prenom=userService.getPrenom();
+    ctrl.isAdmin=userService.isAdmin();
+    console.log("admin :"+ctrl.isAdmin);
+
+
+    ctrl.title = "Page Home";
 
     // ...
 

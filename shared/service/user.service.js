@@ -1,24 +1,47 @@
-﻿angular.module('pzWebAdminApp.shared').service('userService', function($http, $q, pzConfig) {
+﻿angular.module('pzWebAdminApp.shared').service('userService', function($http, $q) {
 
-    var connected = false;
-    var url=pzConfig.USER_RESOURCE_URL;
+    var url="http://localhost:8080/user";
 
     function handleResponse(response) {
-        // console.log("Success !")
         return response.data;
     }
 
     this.isConnected = function() {
-        return connected;
+        return sessionStorage.connected;
     };
 
+    this.getType=function(){
+        return sessionStorage.type;
+    }
+
+    this.getPrenom=function(){
+        return sessionStorage.prenom;
+    }
+
+    this.isAdmin=function(){
+        return sessionStorage.type=="ADMINISTRATEUR";
+    }
+
     this.login = function(login, password) {
-        // TODO : Gestion de la connexion
+        return $http.post(url+"/login",{"login":login,"password":password})
+            .then(function(response){
+                user=response.data;
+                if(user){
+                    sessionStorage.prenom=user.prenom;
+                    sessionStorage.type=user.type;
+                    sessionStorage.connected=true;
+                    console.log(sessionStorage.connected);
+                    console.log(user);
+                }
+            },function(response){console.log(response)});
     };
 
     this.logout = function() {
-        // TODO Gestion de la déconnexion
+        delete sessionStorage.connected;
+        delete sessionStorage.type;
+        delete sessionStorage.prenom;
     };
+
 
     this.findOne=function(id){
         return $http.get(url +"/"+ id)

@@ -11,11 +11,11 @@
 		<input ng-model="ctrl.user.prenom" type="text" class="form-control" id="prenom">
 	</div>
 	<div class="form-group">
-		<label for="login">Identifiant</label>
+		<label for="login">Identifiant *</label>
 		<input ng-model="ctrl.user.login" type="text" class="form-control" id="login" required>
 	</div>
 	<div class="form-group">
-		<label for="mdp">Mot de passe</label>
+		<label for="mdp">Mot de passe *</label>
 		<input ng-model="ctrl.user.mdp" type="password" class="form-control" id="mdp" required>
 	</div>
 	<div class="form-group">
@@ -27,8 +27,9 @@
 		<input ng-model="ctrl.user.tel" type="tel" class="form-control" id="tel">
 	</div>
 	<div class="form-group">
-		<label for="type">Type</label>
+		<label for="type">Type *</label>
 		<select ng-model="ctrl.user.type" name="type" id="type" class="form-control" required>
+			<option></option>
 			<option ng-repeat="t in ctrl.types" value="{{t.key}}">{{t.value}}</option>
 		</select>
 	</div>

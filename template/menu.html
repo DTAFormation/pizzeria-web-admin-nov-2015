@@ -14,7 +14,7 @@
           <li ><a href="#/cuisine">Cuisine</a></li>
           <li ><a href="#/orderdelivered">Livraison</a></li>
 
-          <li class="dropdown">
+          <li class="dropdown" ng-if="ctrl.isAdmin">
             <a class="dropdown-toggle" href="#/administration" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Administration <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li ><a href="#/menuAdmin">Menu</a></li>
@@ -23,5 +23,9 @@
               <li ><a href="#/statsAdmin/">Stats</a></li>
             </ul>
           </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" >
+          <li ng-if="ctrl.connected"><a href="#/deconnexion">Logout</a></li>
+          <li ng-if="!ctrl.connected"><a href="#/connexion">Login</a></li>
         </ul>
       </div>

@@ -75,7 +75,7 @@ body{
   padding: 5px;
 }
 
-input.ng-invalid.ng-dirty{
+input.ng-invalid.ng-dirty,select.ng-invalid.ng-dirty{
     box-shadow: 0 0 6px red;
 }
 
