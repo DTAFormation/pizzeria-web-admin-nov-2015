@@ -33,6 +33,8 @@ angular.module('pzWebAdminApp').run(function($rootScope) {
 });
 
 // Contrôleur qui pilote globalement l'application
-angular.module('pzWebAdminApp').controller("pzWebAdminAppCtrl", function() {
+angular.module('pzWebAdminApp').controller("pzWebAdminAppCtrl", function(userService) {
     this.title = "Pizzeria Web Admin";
+    this.isAdmin=userService.isAdmin();
+    this.connected=userService.isConnected();
 });
