@@ -55,10 +55,19 @@ angular.module('pzWebAdminApp.order').config(function($stateProvider, $urlRouter
         controllerAs: 'ctrl'
       }
     }
-    // url: '/ready',
-    // templateUrl: 'order/viewsReady/liste.order.html',
-    // controller: 'ReadyController',
-    // controllerAs: 'ctrl'
+  })
+    .state('orderReady', {
+    url: '/ready',
+    templateUrl: 'order/viewsReady/liste.order.html',
+    controller: 'ReadyController',
+    controllerAs: 'ctrl'
+  })
+  .state('orderPay', {
+    url: '/pay',
+    params: {command: null},
+    templateUrl: 'order/viewsReady/pay.order.html',
+    controller: 'PayController',
+    controllerAs: 'ctrl'
   })
 
 .state("orderdelivered", {
