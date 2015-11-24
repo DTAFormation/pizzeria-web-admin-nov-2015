@@ -17,7 +17,7 @@
 			<tr ng-repeat="tab in ctrl.commandesPizza track by $index">
 					<td>{{tab.id}}</td>
 					<td>
-						<span ng-repeat="pizza in ctrl.pizzas[$index]">{{pizza.nom}}
+						<span ng-repeat="pizza in ctrl.pizzas[$index]">{{pizza.nom}} &nbsp; {{pizza.taille}}
 							<input type="checkbox" ng-change="ctrl.verifCommande($parent.$index);" value="pretes" ng-model="ctrl.pizzasChecked[$parent.$index][$index]"></br> 
 						</span>
 					</td>
