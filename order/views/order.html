@@ -2,10 +2,11 @@
 
 
   <div>
-    <button type="button" name="name" ng-click="ctrl.listAll()">All</button>
-    <button type="button" name="name" ng-click="ctrl.listDrinks()">Drinks</button>
-    <button type="button" name="name" ng-click="ctrl.listPizzas()">Pizzas</button>
-    <button type="button" name="name" ng-click="ctrl.listDesserts()">Desserts</button>
+    <button class="btn btn-default" type="button" name="name" ng-click="ctrl.listAll()">All</button>
+    <button class="btn btn-default" type="button" name="name" ng-click="ctrl.listDrinks()">Drinks</button>
+    <button class="btn btn-default" type="button" name="name" ng-click="ctrl.listPizzas()">Pizzas</button>
+    <button class="btn btn-default" type="button" name="name" ng-click="ctrl.listDesserts()">Desserts</button>
+
   </div>
     <!-- <input type="checkbox" ng-false-value="NO" ng-true-value="Margarita"
     ng-model="ctrl.pizzas.checked" />Margarita
@@ -16,18 +17,20 @@
   </ul> -->
   <div class="row">
     <div class="col-lg-4">
-      <a ui-sref="order.menu">Menu</a>
-      <a ui-sref="order.pizza">Pizza</a>
+      <!-- <a ui-sref="order.menu">Menu</a>
+      <a ui-sref="order.clientForm">Pizza</a> -->
       <div ui-view="newOrderForm"></div>
 
     </div>
-    <!-- <div class="col-lg-4" ui-view="info"> -->
-    <div class="col-lg-8">
+    <div class="col-lg-4">
       <ul class="list-group">
-        <!-- ng-if="item.taille=='LARGE' || item.format == 'NORMAL'" -->
-        <li class="col-lg-2 list-group-item"  ng-repeat="item in ctrl.items" ng-click="ctrl.select(item)">
+
+        <li class="list-group-item"  ng-repeat="item in ctrl.items" ng-click="ctrl.select(item)">
           {{item.nom}}
-          <!-- <button type="button" name="name" ng-click="ctrl.listPizzas()">M</button> -->
+
         </li>
+    </div>
+    <div class="col-lg-4">
+      <div ui-view="readyOrder"></div>
     </div>
   </div>

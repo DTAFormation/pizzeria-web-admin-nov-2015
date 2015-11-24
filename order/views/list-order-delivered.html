@@ -1,46 +1,123 @@
-<table class="table table-striped">
+<!-- <table class="table table-striped">
 
-	<h1>Liste des commandes à livrer</h1>
+  <h1>Liste des commandes à livrer</h1>
 
-<thead>   
-	<tr>
-		<th>Numéro de la commande</th>
-		<th>Numéro du client</th>
-		<th>Type de la commande</th>
-		<th>Total de la commande</th>
-		<th>Type de paiement</th>
-		<th>Statut du paiement</th>
-		<th>Etat de la commande</th>
-	</tr>
+<thead>
+  <tr>
+    <th>Numéro de la commande</th>
+    <th>Numéro du client</th>
+    <th>Adresse du client</th>
+    <th>Type de la commande</th>
+    <th>Total de la commande</th>
+    <th>Type de paiement</th>
+    <th>Statut du paiement</th>
+    <th>Etat de la commande</th>
+  </tr>
 
 </thead>
 
 <tbody>
 
-	<tr ng-repeat="commande in ctrl.commandesalivrer">
-		<td>{{commande.id}}</td>
+  <tr ng-repeat="commande in ctrl.commandesalivrer">
+      <div>{{commande.id}}</div>
 
-		<td>{{commande.client.id}}</td>
+      <div>{{commande.client.id}}</div>
 
-		<td>{{commande.type}}</td>
+      <div>{{commande.client.adress}}</div>
 
-		<td>{{commande.total}}</td>
+      <div>{{commande.type}}</div>
 
-		<td>{{commande.paiement}}</td>
+      <div>{{commande.total}}</div>
 
-		<td>{{commande.paye}}</td>
+      <div>{{commande.paiement}}</div>
 
-		<td>{{commande.etat}}</td>
+      <div>{{commande.paye}}</div>
 
-		<td><input type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Valider"></input></td>
-	</tr>
+      <div>{{commande.etat}}</div>
+
+      <div><input type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Valider"></input></div>
+
+     <div ng-show="true">
+      Détails : {{commande.produits}}, {{commande.menus}}
+    </div>
+  </tr>
 
 </tbody>
 
 </table>
-
-	
-
+ -->
 
 
 
+
+
+<div class="col-md-12">
+
+  <div class="row">
+    <h1>Liste des commandes à livrer</h1>
+  </div>
+
+  <div class="row borderbottom italic">
+    <div class="col-md-1">N° commande</div>
+    <div class="col-md-1">N° client</div>
+    <div class="col-md-3">Adresse du client</div>
+    <div class="col-md-1">Type de la commande</div>
+    <div class="col-md-1">Total</div>
+    <div class="col-md-1">Paiement</div>
+    <div class="col-md-2">Encaissement</div>
+    <div class="col-md-1">Etat</div>
+    <div class="col-md-1">Validation</div>
+  </div>
+
+
+  <div class="row topspace borderbottom" ng-repeat="commande in ctrl.commandesalivrer track by $index" ng-click="ctrl.toggle[$index]=!ctrl.toggle[$index]">
+
+
+    <div class="row liste">
+      <div class="col-md-1">{{commande.id}}</div>
+
+      <div class="col-md-1">{{commande.client.id}}</div>
+
+      <div class="col-md-3">{{commande.client.addresse}}</div>
+
+      <div class="col-md-1">{{commande.type}}</div>
+
+      <div class="col-md-1">{{commande.total}}</div>
+
+      <div class="col-md-1">{{commande.paiement}}</div>
+
+      <div class="col-md-2">
+        <p ng-show="commande.paye">Commande Réglée</p>
+        <button ng-show="!commande.paye" type="button" ng-click="ctrl.encaissement(commande)" class="btn btn-success">Encaissement</button>
+      </div>
+
+      <div class="col-md-1">{{commande.etat}}</div>
+
+      <div class="col-md-1">
+        <input ng-show="commande.etat=='PREPARE'" type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Livrer"></input>
+        <input ng-show="commande.etat=='LIVRAISON' && commande.paye" type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Valider"></input>
+        <input ng-show="commande.etat=='LIVRAISON' && !commande.paye" type="button" class="btn btn-success" ng-click="ctrl.select(commande)" value="Commande Livrée" disabled="disabled"></input>
+      </div>
+
+    </div>
+
+
+    <div class="row topspace" ng-show="ctrl.toggle[$index]">
+
+    <div ng-hide="commande.produits.length=='0'">
+         <strong>Les produits : </strong><br>
+           <div ng-repeat="produit in commande.produits">{{produit.nom}}, {{produit.prix}}, {{produit.taille}}, {{produit.format}}<br>
+           </div>
+
+    </div>
+    <div ng-hide="commande.menus.length=='0'">
+        <strong>Les menus : </strong><br>
+           <div ng-repeat="menu in commande.menus">{{menu.nom}}, {{menu.prix}},
+             <p ng-repeat="produitmenu in menu.produits">{{produitmenu.nom}}, {{produitmenu.prix}}, {{produitmenu.taille}}, {{produitmenu.format}}<br></p>
+           </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

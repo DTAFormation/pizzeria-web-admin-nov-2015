@@ -78,7 +78,7 @@ angular.module('pzWebAdminApp.product').controller('productController', function
 
   ctrl.listupdate=function(){
     PizzaService.getPizzaList().then(function ihaveit(response){
-      ctrl.pizzas = response  
+      ctrl.pizzas = response ;
     });
     
     DrinkService.getDrinkList().then(function ihaveit(response){
@@ -92,9 +92,13 @@ angular.module('pzWebAdminApp.product').controller('productController', function
     IngredientsService.getIngredientList().then(function ihaveit(response){
       ctrl.ingredientsProducts = response  
     });
+
+    ctrl.produitSelectionner=null;
   }
 
   ctrl.listupdate();
+
+
 
 //Initialisation de variable pour les formulaires
 ctrl.typeProducts=[ {
@@ -134,7 +138,8 @@ ctrl.formatProducts=[ {
 ],
 
 //Pour selectionner les ingredients sur le formulaire d'ajout de produit
-ctrl.listingredientForm=[]
+ctrl.listingredientForm=[],
+ ctrl.ingredientsProductmodif=[],
 
 //BOUTON
 
@@ -142,42 +147,62 @@ ctrl.listingredientForm=[]
         //Pour l'afichage du détail
         ctrl.select = function(item) {
           ctrl.produitSelectionner=item;
+          console.log(item);
         };
 
         //Bouton modifier du détail du produit
         ctrl.modifier=function(item){
+          
+          ctrl.ingredientsProductmodif=[];
+
+          angular.forEach(ctrl.ingredientsProducts, function(value,key){
+
+              angular.forEach(ctrl.produitSelectionner.ingredients,function(ingredient,key){
+                if(value.id==ingredient.id){value.selected=true;};
+              });
+
+              ctrl.ingredientsProductmodif.push(value);
+          });
+          
+          console.log(ctrl.ingredientsProductmodif);
+          console.log(ctrl.produitSelectionner);
          $state.transitionTo('product.modifproduct');
        }
 
         //Bouton supprimer du détail du produit
         ctrl.supprimer=function(id){
-         ProductService.deleteProduct(id).then(function ihaveit(response){
+         ProductService.deleteProduct(id).then(function (response){
+          ctrl.produitSelectionner=[];
           ctrl.listupdate();
           $state.transitionTo('product.list');
         });
        }
 
     //Pour la vue liste ingredient
-    ctrl.supprimerIngredient=function(item){
-      IngredientsService.deleteIngredient(id).then(function ihaveit(response){
+    ctrl.supprimerIngredient=function(id){
+      IngredientsService.deleteIngredient(id).then(function (response){
         ctrl.listupdate();
         $state.transitionTo('product.listingredient'); 
-      });       
+      }, function (error){
+        
+          alert("Supprimer en premier les pizzas qui ont cet ingredient",error);
+      });
     }
 
-    //Pour le formulaire d'ajout d'un produit et modification
+    //Pour le formulaire d'ajout d'un produit 
     ctrl.save = function() {
+       
       if(this.productForm.$invalid){
         alert("Erreur")
         return
       }
-          // ctrl.productForm.ingredients=ctrl.listingredientForm TODO
-
-          ProductService.saveProduct(ctrl.productForm).then(function ihaveit(response){
+          ctrl.productForm.ingredients=ctrl.ingredientsProducts.filter(function(ingredient){ return ingredient.selected});
+        
+            ProductService.saveProduct(ctrl.productForm).then(function (response){
             ctrl.productForm=null;
             ctrl.listupdate();
             $state.transitionTo('product.list');
-          }); 
+          });
 
         };
 
@@ -186,14 +211,14 @@ ctrl.listingredientForm=[]
             alert("Erreur")
             return
           }
-          
 
-          ProductService.updateProduct(ctrl.produitSelectionner).then(function ihaveit(response){
+            ctrl.produitSelectionner.ingredients=ctrl.ingredientsProductmodif.filter(function(ingredient){ return ingredient.selected});
+        
+            ProductService.saveProduct(ctrl.produitSelectionner).then(function (response){
             ctrl.produitSelectionner=null;
             ctrl.listupdate();
             $state.transitionTo('product.list');
-          }); 
-
+            });
         };
 
     //Pour le formulaire d'ajout d'un ingredient
@@ -203,22 +228,13 @@ ctrl.listingredientForm=[]
         return
       }
 
-      IngredientsService.saveIngredient(ctrl.ingredientForm).then(function ihaveit(response){
+      IngredientsService.saveIngredient(ctrl.ingredientForm).then(function (response){
        ctrl.ingredientForm=null;
        ctrl.listupdate();
        $state.transitionTo('product.listingredient');
      }); 
       
     }
-
-    //Pour la suppression d'un ingredient
-    ctrl.suppressionimerIngredient=function(id){
-
-     IngredientsService.deleteIngredient(id).then(function ihaveit(response){
-      ctrl.listupdate();
-      $state.transitionTo('product.listingredient');
-    }); 
-   }
 
 
  });
