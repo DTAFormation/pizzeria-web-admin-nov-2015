@@ -1,8 +1,8 @@
-﻿angular.module('pzWebAdminApp', [
+angular.module('pzWebAdminApp', [
     'ui.utils',
     'ngRoute',
-    'ngAnimate',
     'ui.router',
+
 
     'pzWebAdminApp.shared',
     'pzWebAdminApp.filters',
